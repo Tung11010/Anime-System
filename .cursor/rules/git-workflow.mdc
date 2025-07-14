@@ -1,0 +1,46 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Git Workflow
+
+## Nguyên tắc chung
+- Sử dụng branching model: feature/bugfix/hotfix branches
+- Tạo Pull Requests cho mọi thay đổi
+- Code phải được review trước khi merge
+
+## Branch Naming
+- Feature: `feature/ten-feature`
+- Bugfix: `bugfix/ma-bug-ten-bug`
+- Hotfix: `hotfix/ma-bug-ten-bug`
+- Release: `release/x.y.z`
+
+## Commit Message
+- Format: `type(scope): message`
+- Types: feat, fix, docs, style, refactor, test, chore
+- Viết message ngắn gọn, rõ ràng và mô tả đúng thay đổi
+
+```
+feat(auth): implement login with Google
+fix(dashboard): fix incorrect data rendering
+refactor(api): optimize API call performance
+```
+
+## .gitignore
+- File [.gitignore](mdc:.gitignore) đã được cấu hình để bỏ qua các file không cần thiết
+- Các file nhạy cảm như `.env` đã được thêm vào .gitignore
+- Nếu file đã được theo dõi trước khi thêm vào .gitignore, sử dụng lệnh:
+  ```
+  git rm --cached <file>
+  ```
+
+## Husky Hooks
+- Pre-commit hook được cấu hình trong [.husky/](mdc:.husky)
+- Tự động chạy linter và formatter trước khi commit
+- Đảm bảo chất lượng code trước khi push
+
+## CI/CD Flow
+- Xem cấu hình CI/CD trong [Jenkinsfile](mdc:Jenkinsfile)
+- Build và test tự động khi push code
+- Deployment tự động cho các branches chính

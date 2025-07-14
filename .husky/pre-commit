@@ -1,0 +1,36 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+yarn lint
+
+# Get the current branch name
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+
+# Define your branch naming convention regex
+branch_regex="^(feature|bugfix|hotfix|release)\/[a-z0-9._-]+$"
+
+
+# Check if the branch name is main or dev
+if [[ "$branch_name" == "main" || "$branch_name" == "dev" ]]; then
+  email=$(git config user.email)
+  
+  # List of allowed usernames
+  allowed_email=("chunguyenchuong2014bg@gmail.com" "chuongcn@vissoft.vn")
+  # Check if the username is in the allowed list
+  if [[ ! " ${allowed_email[@]} " =~ " ${email} " ]]; then
+    echo "Error: User '$email' is not allowed to push to the 'dev' branch."
+    exit 1
+  fi
+  echo "Skipping branch name check for '$branch_name' with user has email '$email'"
+
+else
+  # Check if the branch name matches the convention
+  if [[ ! $branch_name =~ $branch_regex ]]; then
+    echo "Error: Branch name '$branch_name' does not follow the naming convention."
+    echo "Allowed patterns: feature/*, bugfix/*, hotfix/*, release/*"
+    exit 1
+  fi
+fi
+
+# If the branch name is valid, allow the commit
+exit 0

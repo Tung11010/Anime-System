@@ -1,0 +1,38 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Cấu trúc dự án Frontend
+
+## Tổng quan
+Dự án được tổ chức theo cấu trúc module-based với Vite, React và TypeScript. 
+
+- Entry point chính: [src/main.tsx](mdc:src/main.tsx)
+- Cấu hình: [vite.config.ts](mdc:vite.config.ts), [tailwind.config.js](mdc:tailwind.config.js), [tsconfig.json](mdc:tsconfig.json)
+- Styles: [src/index.scss](mdc:src/index.scss)
+- Types: [src/types.ts](mdc:src/types.ts)
+
+## Cấu trúc thư mục
+
+- `src/modules/`: Chứa các module chính của ứng dụng, mỗi module là một feature độc lập
+- `src/components/`: Các component dùng chung trong toàn bộ ứng dụng
+- `src/routers/`: Cấu hình routes của ứng dụng
+- `src/services/`: API services, gọi HTTP request
+- `src/hooks/`: Custom React hooks
+- `src/helpers/`: Các hàm helper, utility
+- `src/constants/`: Constants và enums
+- `src/assets/`: Images, fonts, và các static assets khác
+- `src/configs/`: Cấu hình ứng dụng
+- `src/hoc/`: Higher-Order Components
+
+## Quy tắc cấu trúc module
+
+Mỗi module trong `src/modules/` nên có cấu trúc sau:
+- `index.tsx`: Export public API của module
+- `components/`: Components của module
+- `routes.tsx`: Route definitions của module
+- `services/`: API services của module
+- `hooks/`: Hooks của module
+- `types.ts`: TypeScript types và interfaces của module
+- `constants.ts`: Constants của module

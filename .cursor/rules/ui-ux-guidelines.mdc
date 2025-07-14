@@ -1,0 +1,56 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# UI/UX Guidelines
+
+## Tailwind CSS
+- Sử dụng Tailwind CSS làm framework chính cho styling
+- Xem cấu hình Tailwind tại [tailwind.config.js](mdc:tailwind.config.js)
+- Tuân thủ design system và các biến được định nghĩa trong config
+
+## Mobile-First Design
+- Luôn thiết kế và triển khai cho màn hình mobile trước, sau đó scale lên màn hình lớn hơn
+- Sử dụng Tailwind responsive prefixes (sm:, md:, lg:, xl:) để điều chỉnh layout
+
+```tsx
+<div className="w-full md:w-1/2 lg:w-1/3">
+  {/* Content */}
+</div>
+```
+
+## Accessibility
+- Sử dụng semantic HTML elements (nav, header, main, footer, section, article)
+- Đảm bảo tỷ lệ contrast tốt giữa text và background
+- Thêm attributes aria khi cần thiết
+- Hỗ trợ keyboard navigation
+
+## Components UI
+- Button có kích thước tối thiểu 44x44px để dễ dàng tap trên mobile
+- Form nên có validation rõ ràng và feedback tức thời
+- Sử dụng skeleton loader cho trạng thái loading
+
+## Typography
+- Sử dụng hệ thống typography responsive
+- Tránh font-size quá nhỏ trên mobile (<14px)
+- Giữ line-height hợp lý để text dễ đọc
+
+## Animations & Transitions
+- Sử dụng animation và transition tinh tế để tăng UX
+- Dùng Tailwind transition utilities hoặc Framer Motion cho animation phức tạp
+- Cải thiện UX với các micro-interactions
+
+## Mockups & Design Reference
+- Tham khảo hình ảnh trong thư mục [public/mockups/](mdc:public/mockups) để đảm bảo UI nhất quán với thiết kế
+- Tuân thủ color palette và spacing đã được thiết lập
+
+## Error Handling & Feedback
+- Hiển thị thông báo lỗi rõ ràng và gợi ý giải pháp
+- Cung cấp feedback cho mọi user action (loading, success, error)
+- Sử dụng toast notifications cho thông báo tạm thời
+
+## Layout Components
+- Sử dụng Grid hoặc Flexbox cho layout responsive
+- Đảm bảo margins và paddings nhất quán
+- Tránh horizontal scrolling trên mobile

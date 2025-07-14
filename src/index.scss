@@ -1,0 +1,442 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url('assets/fonts/Inter-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url('assets/fonts/Inter-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url('assets/fonts/Inter-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+.tickers-list,
+.tickers-list-1 {
+  will-change: auto !important;
+}
+
+div {
+  font-size: 14px;
+  font-weight: 400;
+  -ms-overflow-style: none;
+}
+
+button {
+  border: none;
+}
+
+::-webkit-scrollbar {
+  display: block;
+  width: 8px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.ant-form-item-required {
+  position: relative;
+
+  &::after {
+    right: 0px;
+  }
+
+  &::before {
+    position: absolute;
+    margin-inline-end: -5px !important;
+  }
+}
+
+.ant-form-horizontal {
+  .ant-form-item-required {
+    margin-right: 12px;
+  }
+
+  ::before {
+    right: 13px;
+    top: 7px;
+  }
+}
+
+.ant-form-vertical {
+  .ant-form-item-required {
+    &::after {
+      margin-inline-start: -10px !important;
+      margin-inline-end: 0 !important;
+
+    }
+
+    &::before {
+      position: absolute;
+      right: -13px;
+      top: 0px;
+    }
+  }
+}
+
+.ant-btn:has(.ant-btn-icon) {
+  display: flex;
+  align-items: center;
+
+  .ant-btn-icon {
+    margin-inline-end: 0px !important;
+  }
+}
+
+.ant-upload-list-item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Custom Typography Styles for HTML Content */
+.prose {
+  max-width: none;
+  color: theme('colors.gray.700');
+  line-height: theme('lineHeight.relaxed');
+
+  h1 {
+    color: theme('colors.gray.900');
+    font-weight: theme('fontWeight.bold');
+    font-size: theme('fontSize.2xl');
+    line-height: theme('lineHeight.tight');
+    margin-top: theme('spacing.6');
+    margin-bottom: theme('spacing.4');
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h2 {
+    color: theme('colors.gray.900');
+    font-weight: theme('fontWeight.semibold');
+    font-size: theme('fontSize.xl');
+    line-height: theme('lineHeight.tight');
+    margin-top: theme('spacing.5');
+    margin-bottom: theme('spacing.3');
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    color: theme('colors.gray.900');
+    font-weight: theme('fontWeight.semibold');
+    font-size: theme('fontSize.lg');
+    line-height: theme('lineHeight.tight');
+    margin-top: theme('spacing.4');
+    margin-bottom: theme('spacing.2');
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h4,
+  h5,
+  h6 {
+    color: theme('colors.gray.900');
+    font-weight: theme('fontWeight.medium');
+    font-size: theme('fontSize.base');
+    line-height: theme('lineHeight.tight');
+    margin-top: theme('spacing.3');
+    margin-bottom: theme('spacing.2');
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  p {
+    margin-bottom: theme('spacing.3');
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul,
+  ol {
+    padding-left: theme('spacing.6') !important;
+    margin-bottom: theme('spacing.3') !important;
+    list-style: revert !important;
+    /* Override CSS reset */
+
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  ul {
+    list-style-type: disc !important;
+  }
+
+  ol {
+    list-style-type: decimal !important;
+  }
+
+  li {
+    color: theme('colors.gray.700') !important;
+    margin: 0 !important;
+    /* Remove all margins */
+    padding: 0 !important;
+    /* Remove all paddings */
+    line-height: theme('lineHeight.relaxed') !important;
+
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  ul ul,
+  ol ol,
+  ul ol,
+  ol ul {
+    margin-top: theme('spacing.1') !important;
+    margin-bottom: theme('spacing.1') !important;
+  }
+
+  /* Override ReactQuill và các CSS khác */
+  * li {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Specific override cho ReactQuill content */
+  &[dangerouslySetInnerHTML] li,
+  div[dangerouslySetInnerHTML] li {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Force override mọi CSS có thể */
+  li,
+  li:before,
+  li:after {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Override Quill editor specific styles */
+  .ql-editor li {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Force inline display override for li elements */
+  li {
+    display: list-item !important;
+    vertical-align: baseline !important;
+  }
+
+  /* Remove any inherited spacing from ReactQuill */
+  .prose p+ul,
+  .prose p+ol {
+    margin-top: -theme('spacing.1') !important;
+  }
+
+  .prose ul+p,
+  .prose ol+p {
+    margin-top: theme('spacing.2') !important;
+  }
+
+  strong {
+    color: theme('colors.gray.900');
+    font-weight: theme('fontWeight.semibold');
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  a {
+    color: theme('colors.blue.600');
+    text-decoration: underline;
+
+    &:hover {
+      color: theme('colors.blue.800');
+    }
+  }
+
+  blockquote {
+    font-style: italic;
+    border-left: 4px solid theme('colors.gray.300');
+    padding-left: theme('spacing.4');
+    color: theme('colors.gray.600');
+    margin: theme('spacing.4') 0;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: theme('borderRadius.md');
+    margin: theme('spacing.4') 0;
+  }
+
+  pre {
+    background-color: theme('colors.gray.100');
+    border-radius: theme('borderRadius.md');
+    padding: theme('spacing.3');
+    overflow-x: auto;
+    margin: theme('spacing.3') 0;
+    font-family: theme('fontFamily.mono');
+    font-size: theme('fontSize.sm');
+  }
+
+  code {
+    background-color: theme('colors.gray.100');
+    padding: theme('spacing.1') theme('spacing.2');
+    border-radius: theme('borderRadius.sm');
+    font-family: theme('fontFamily.mono');
+    font-size: theme('fontSize.sm');
+  }
+
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: theme('spacing.4') 0;
+  }
+
+  th,
+  td {
+    border: 1px solid theme('colors.gray.300');
+    padding: theme('spacing.2') theme('spacing.3');
+    text-align: left;
+  }
+
+  th {
+    background-color: theme('colors.gray.50');
+    font-weight: theme('fontWeight.semibold');
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid theme('colors.gray.300');
+    margin: theme('spacing.6') 0;
+  }
+}
+
+/* Responsive typography */
+@media (min-width: theme('screens.sm')) {
+  .prose {
+    h1 {
+      font-size: theme('fontSize.3xl');
+    }
+
+    h2 {
+      font-size: theme('fontSize.2xl');
+    }
+
+    h3 {
+      font-size: theme('fontSize.xl');
+    }
+  }
+}
+
+@media (min-width: theme('screens.lg')) {
+  .prose {
+    h1 {
+      font-size: theme('fontSize.4xl');
+    }
+
+    h2 {
+      font-size: theme('fontSize.3xl');
+    }
+
+    h3 {
+      font-size: theme('fontSize.2xl');
+    }
+  }
+}

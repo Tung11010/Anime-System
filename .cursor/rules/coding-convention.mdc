@@ -1,0 +1,61 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Quy tắc Coding và TypeScript
+
+## Quy tắc đặt tên
+- **Components**: PascalCase (VD: `Button.tsx`, `UserProfile.tsx`)
+- **Hooks**: camelCase với prefix "use" (VD: `useAuth.ts`, `useLocalStorage.ts`)
+- **Functions/Variables**: camelCase (VD: `getUserData`, `fetchApiData`)
+- **Types/Interfaces**: PascalCase (VD: `UserType`, `ApiResponse`)
+- **Enum**: PascalCase với suffix "Enum" (VD: `StatusEnum`, `RoleEnum`)
+- **Constants**: UPPER_SNAKE_CASE (VD: `API_URL`, `MAX_RETRY_COUNT`)
+
+## TypeScript
+- Luôn sử dụng TypeScript cho mọi component và function
+- Tránh sử dụng `any` type, thay vào đó hãy dùng `unknown` hoặc type cụ thể
+- Sử dụng TypeScript's utility types (Partial, Required, Pick, Omit...)
+- Tạo interface cho tất cả props của components
+- Sử dụng type annotation cho các function return types
+
+## Cấu trúc Component
+```tsx
+import React from 'react';
+import { SomeType } from '../types';
+
+interface ButtonProps {
+  text: string;
+  onClick: () => void;
+  variant?: 'primary' | 'secondary';
+}
+
+export const Button: React.FC<ButtonProps> = ({ 
+  text, 
+  onClick, 
+  variant = 'primary' 
+}) => {
+  // Component logic
+  return (
+    <button 
+      className={`btn btn-${variant}`} 
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
+};
+```
+
+## Hooks
+- Tách logic phức tạp thành custom hooks
+- Hooks luôn bắt đầu bằng từ `use`
+- Nên tạo hooks đủ linh hoạt để có thể tái sử dụng
+
+## Best Practices
+- Tối ưu re-renders với React.memo, useMemo, useCallback
+- Sử dụng lazy loading cho components và routes
+- Viết unit tests cho tất cả components và hooks
+- Component logic nên đơn giản và tập trung vào presentation
+- Business logic nên được tách ra thành hooks hoặc services
