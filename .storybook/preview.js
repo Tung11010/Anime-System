@@ -1,4 +1,5 @@
 /** @type { import('@storybook/react-vite').Preview } */
+import '../src/index.scss'
 const preview = {
   parameters: {
     controls: {
