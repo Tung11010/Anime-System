@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import VerticalCard from './VerticalCard';
 import HorizonCard from './HorizonCard';
 import CommentCard from './CommentCard';

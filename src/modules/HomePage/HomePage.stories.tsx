@@ -1,6 +1,6 @@
 // src/modules/HomePage/components/SlideHomePage.stories.tsx
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import HomePage from './HomePage';
 
 const meta: Meta<typeof HomePage> = {

@@ -1,6 +1,6 @@
 // src/modules/Layouts/components/HeaderLayout.stories.tsx
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import HeaderClient from './HeaderClient';
 
 const meta: Meta<typeof HeaderClient> = {
