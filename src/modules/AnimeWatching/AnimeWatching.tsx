@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import AnimeBanner from "./component/VideoWatching";
-import EpisodeButton from "../../component/Button/buttonEpisodes";
-import AvatarCircle from "../../component/Button/buttonAvatar";
-import CommentCard from "../../component/Card/commentCard";
-import InputComment from "../../component/Input/InputComment";
-import ButtonReview from "../../component/Button/buttonReview";
+import EpisodeButton from "../../components/Button/buttonEpisodes";
+import AvatarCircle from "../../components/Button/buttonAvatar";
+import { CommentCard } from '../../components/Card';
+import InputComment from "../../components/Input/InputComment";
+import ButtonReview from "../../components/Button/buttonReview";
 
 const episodes = Array.from({ length: 19 }, (_, i) => `Ep ${String(i + 1).padStart(2, "0")}`);
 
