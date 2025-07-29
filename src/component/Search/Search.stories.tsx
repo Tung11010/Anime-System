@@ -3,7 +3,7 @@ import OverlaySearch from './OverlaySearch';
 import { useState } from 'react';
 
 const meta: Meta<typeof OverlaySearch> = {
-  title: 'Components/OverlaySearch',
+  title: 'Components/Search',
   component: OverlaySearch,
   tags: ['autodocs'],
 };
@@ -29,6 +29,6 @@ const OverlayWrapper = () => {
   );
 };
 
-export const Default: Story = {
+export const Overlay: Story = {
   render: () => <OverlayWrapper />,
 };

@@ -1,27 +1,47 @@
 import { Eye } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const HorizonCard = () => {
+export interface HorizonCardProps {
+  thumbnail: string;
+  episode: string;
+  views: number;
+  title: string;
+  link: string;
+}
+
+const HorizonCard = ({
+  thumbnail,
+  episode,
+  views,
+  title,
+  link,
+}: HorizonCardProps) => {
   return (
-    <div
-      className="relative bg-cover bg-center w-[280px] h-[135px] mt-2 rounded-md overflow-hidden"
-      style={{
-        backgroundImage: "url('https://i.redd.it/w6541yr1pamb1.jpg')",
-      }}
-    >
-      {/* Episode + View */}
-      <div className="absolute top-[6%] left-0 w-full flex justify-between px-3">
-        <div className="bg-red-600 text-white text-xs px-2 py-[1px] rounded">
-          11/98
+    <div className="relative w-[280px] h-[135px] mt-2 rounded-md overflow-hidden">
+      {/* Image + overlay được bọc bằng Link */}
+      <Link to={link}>
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('${thumbnail}')`,
+          }}
+        >
+          {/* Episode + View */}
+          <div className="absolute top-[6%] left-0 w-full flex justify-between px-3">
+            <div className="bg-red-600 text-white text-xs px-2 py-[1px] rounded">
+              {episode}
+            </div>
+            <div className="bg-gray-700 text-white text-xs px-2 py-[1px] rounded font-semibold flex items-center gap-1">
+              <Eye size={11} />
+              {views.toLocaleString()}
+            </div>
+          </div>
         </div>
-        <div className="bg-gray-700 text-white text-xs px-2 py-[1px] rounded font-semibold flex items-center gap-1">
-          <Eye size={11} />
-          9149
-        </div>
-      </div>
+      </Link>
 
-      {/* Description */}
-      <div className="absolute bottom-0 left-0 w-full px-2 pb-2 pt-10 bg-gradient-to-t from-black/60 to-transparent text-white font-bold text-[16px]">
-        Boruto: Naruto Next Generations
+      {/* Description không nằm trong Link */}
+      <div className="absolute bottom-0 left-0 w-full px-2 pb-2 pt-10 bg-gradient-to-t from-black/60 to-transparent text-white font-bold text-[16px] z-10">
+        {title}
       </div>
     </div>
   );

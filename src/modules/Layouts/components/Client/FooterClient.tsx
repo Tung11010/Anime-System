@@ -14,7 +14,7 @@ const FooterClient = () => {
       </div>
 
       {/* Nội dung */}
-      <div className="w-[90%] max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="w-[85%] max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         
         {/* Logo */}
         <div className="text-[1.5rem] font-bold text-white text-center md:text-left ml-0 md:ml-[8rem]">

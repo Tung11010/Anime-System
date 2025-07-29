@@ -20,7 +20,7 @@ const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
         {/* Menu */}
         <nav className="w-full md:w-auto flex-2">
           <ul className="flex flex-col md:flex-row text-white list-none items-center justify-center gap-3 md:gap-6 text-sm m-0 p-0">
-            <li className="px-3 py-2 rounded-sm">
+            <li className="px-3 py-2 rounded-sm bg-[red]">
               <Link to="/" className="no-underline text-[#fff2f2]">Homepage</Link>
             </li>
             <li className="relative group">

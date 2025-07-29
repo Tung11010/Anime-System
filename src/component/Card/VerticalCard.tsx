@@ -1,30 +1,54 @@
+// VerticalCard.tsx
 import { Eye, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const VerticalCard = () => {
+export interface VerticalCardProps {
+  link: string;
+  thumbnail: string;
+  episode?: string;
+  comments?: number;
+  views?: number;
+  title: string;
+}
+
+const VerticalCard = ({
+  link,
+  thumbnail,
+  episode,
+  comments,
+  views,
+  title,
+}: VerticalCardProps) => {
   return (
-    <a href="#" className="block cursor-pointer text-white w-[165px]">
+    <Link to={link} className="block cursor-pointer text-white w-[165px]">
       {/* Container ảnh và overlay */}
       <div className="relative">
         {/* Episode badge */}
-        <div className="absolute top-2 left-2 bg-red-600 text-white text-[11px] px-3 py-[1px] rounded w-fit z-10">
-          11/98
-        </div>
+        {episode && (
+          <div className="absolute top-2 left-2 bg-red-600 text-white text-[11px] px-3 py-[1px] rounded w-fit z-10">
+            {episode}
+          </div>
+        )}
 
         {/* Thumbnail */}
         <img
-          src="https://i.redd.it/w6541yr1pamb1.jpg"
-          alt="Boruto"
-          className="w-[165px] h-[238px] rounded mt-2"
+          src={thumbnail}
+          alt={title}
+          className="w-[165px] h-[238px] rounded mt-2 object-cover"
         />
 
-        {/* Icons overlay */}
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex justify-between gap-[4rem] text-white text-[9px] z-10 ">
-          <div className="bg-[#3d3d3d] text-[11px] px-1.5 py-[1px] rounded flex items-center gap-1">
-            <MessageCircle size={11} /> 11
-          </div>
-          <div className="bg-[#3d3d3d] text-[11px] px-1.5 py-[1px] rounded flex items-center gap-1">
-            <Eye size={11} /> 9149
-          </div>
+        {/* Overlay icons */}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex justify-between gap-[4rem] text-white text-[9px] z-10">
+          {typeof comments !== "undefined" && (
+            <div className="bg-[#3d3d3d] text-[11px] px-1.5 py-[1px] rounded flex items-center gap-1">
+              <MessageCircle size={11} /> {comments}
+            </div>
+          )}
+          {typeof views !== "undefined" && (
+            <div className="bg-[#3d3d3d] text-[11px] px-1.5 py-[1px] rounded flex items-center gap-1">
+              <Eye size={11} /> {views}
+            </div>
+          )}
         </div>
       </div>
 
@@ -35,10 +59,8 @@ const VerticalCard = () => {
       </div>
 
       {/* Title */}
-      <p className="mt-1 text-white text-[13px] font-[600] px-2">
-        Boruto: Naruto Next Generations
-      </p>
-    </a>
+      <p className="mt-1 text-white text-[13px] font-[600] px-2">{title}</p>
+    </Link>
   );
 };
 

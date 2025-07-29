@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import SectionHeading from "./SectionHeading";
 
 const meta: Meta<typeof SectionHeading> = {
-  title: "Components/SectionHeading",
+  title: "Components/Section",
   component: SectionHeading,
   tags: ["autodocs"],
   parameters: {
