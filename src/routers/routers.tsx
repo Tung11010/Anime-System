@@ -4,7 +4,7 @@ import Layouts from "@/modules/Layouts";
 import { createHashRouter } from "react-router-dom";
 import { routesAdmin } from "./routes";
 import UserLayout from "@/modules/Layouts/components/Client/LayoutClient";
-import HomePage from "@/modules/HomePage/HomePage";
+import HomePage from "@/modules/HomePage/pages/HomePage";
 
 export const routers = createHashRouter([
   {

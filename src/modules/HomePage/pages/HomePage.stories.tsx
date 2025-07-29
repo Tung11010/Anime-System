@@ -2,10 +2,19 @@
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import HomePage from './HomePage';
+import { BrowserRouter } from 'react-router-dom';
+
 
 const meta: Meta<typeof HomePage> = {
   title: 'HomePage',
   component: HomePage,
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
   tags: ['autodocs'],
 };
 

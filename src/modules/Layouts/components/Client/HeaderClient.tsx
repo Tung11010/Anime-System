@@ -7,8 +7,8 @@ interface HeaderLayoutProps {
 
 const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
   return (
-    <header className="bg-[#070720] py-3">
-      <div className="w-[90%] max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between ">
+    <header className="bg-[#070720] h-17">
+      <div className="w-[90%] max-w-[1200px] h-full mx-auto flex flex-col md:flex-row items-center justify-between ">
         
         {/* Logo */}
         <div className="text-2xl font-bold text-white w-full md:w-auto px-4 md:px-0 flex-1 text-center">
@@ -19,8 +19,8 @@ const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
 
         {/* Menu */}
         <nav className="w-full md:w-auto flex-2">
-          <ul className="flex flex-col md:flex-row text-white list-none items-center justify-center gap-3 md:gap-6 text-sm m-0 p-0">
-            <li className="px-3 py-2 rounded-sm bg-[red]">
+          <ul className="flex flex-col md:flex-row text-white list-none items-center justify-center gap-7 md:gap-10 text-sm m-0 p-0">
+            <li className="px-6 py-6  bg-[red]">
               <Link to="/" className="no-underline text-[#fff2f2]">Homepage</Link>
             </li>
             <li className="relative group">

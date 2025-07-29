@@ -24,7 +24,7 @@ const MiniVerticalCard = ({
       />
 
       {/* Content */}
-      <div className="flex flex-col justify-center gap-1">
+      <div className="flex flex-col justify-center gap-2 -mt-10">
         {/* Labels */}
         <div className="flex gap-2">
           <div className="bg-gray-700 text-[8px] px-2 py-[1px] rounded-lg">Active</div>

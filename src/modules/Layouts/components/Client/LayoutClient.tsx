@@ -3,15 +3,16 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import HeaderClient from "./HeaderClient";
 import FooterClient from "./FooterClient";
+import HomePage from "@/modules/HomePage/pages/HomePage";
 
 
 const UserLayout = () => {
   const [showSearch, setShowSearch] = useState(false)
   return (
-    <div className='user-layout'>
+    <div>
         <OverlaySearch  isActive={showSearch} OnClose={() => setShowSearch(false)}/>
         <HeaderClient onSearchClick={() => setShowSearch(true)}/>
-        <Outlet />
+        <HomePage />
         <FooterClient/>
     </div>
   );
