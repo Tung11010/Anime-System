@@ -33,7 +33,7 @@ const mockTrendingData = [
   {
     id: 4,
     link: "/anime/one-piece",
-    thumbnail: "https://preview.colorlib.com/theme/anime/img/trending/trend-1.jpg",
+    thumbnail: "https://preview.colorlib.com/theme/anime/img/popular/popular-2.jpg.webp",
     title: "The Seven Deadly Sins: Wrath of the Gods",
     episode: "18/18",
     views: 1200,
@@ -42,7 +42,7 @@ const mockTrendingData = [
   {
     id: 5,
     link: "/anime/one-piece",
-    thumbnail: "https://preview.colorlib.com/theme/anime/img/trending/trend-5.jpg",
+    thumbnail: "https://preview.colorlib.com/theme/anime/img/popular/popular-3.jpg.webp",
     title: "The Seven Deadly Sins: Wrath of the Gods",
     episode: "18/18",
     views: 1200,
@@ -51,7 +51,7 @@ const mockTrendingData = [
   {
     id: 6,
     link: "/anime/one-piece",
-    thumbnail: "https://preview.colorlib.com/theme/anime/img/trending/trend-6.jpg",
+    thumbnail: "https://preview.colorlib.com/theme/anime/img/popular/popular-4.jpg.webp",
     title: "The Seven Deadly Sins: Wrath of the Gods",
     episode: "18/18",
     views: 1200,
@@ -62,8 +62,8 @@ const mockTrendingData = [
 const TrendingSection = () => {
   return (
     <section>
-      <SectionHeading title="Trending Now" size="large" />
-      <div className="grid grid-cols-3 gap-10">
+      <SectionHeading title="TRENDING NOW" size="large" showViewAll />
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
         {mockTrendingData.map((item) => (
           <VerticalCard key={item.id} {...item} />
         ))}

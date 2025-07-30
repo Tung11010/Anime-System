@@ -38,10 +38,10 @@ const VerticalCard = ({
         />
 
         {/* Overlay icons */}
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex justify-between gap-[4rem] text-white text-[9px] z-10">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex justify-between gap-[3.5rem] text-white text-[9px] z-10">
           {typeof comments !== "undefined" && (
             <div className="bg-[#3d3d3d] text-[11px] px-1.5 py-[1px] rounded flex items-center gap-1">
-              <MessageCircle size={11} /> {comments}
+              <MessageCircle size={11} className="stroke-white fill-white" /> {comments}
             </div>
           )}
           {typeof views !== "undefined" && (
@@ -53,13 +53,13 @@ const VerticalCard = ({
       </div>
 
       {/* Labels */}
-      <div className="flex mt-2 px-0 gap-1">
+      <div className="flex mt-5 px-0 gap-1 ">
         <div className="bg-gray-700 text-[8px] px-2 py-[1px] rounded-lg">Active</div>
         <div className="bg-gray-700 text-[8px] px-2 py-[1px] rounded-lg">Movie</div>
       </div>
 
       {/* Title */}
-      <p className="mt-1 text-white text-[13px] font-[600] px-2">{title}</p>
+      <p className="mt-3 text-white text-[13px] font-[600] ">{title}</p>
     </Link>
   );
 };

@@ -31,7 +31,7 @@ const HorizonCard = ({
             <div className="bg-red-600 text-white text-xs px-2 py-[1px] rounded">
               {episode}
             </div>
-            <div className="bg-gray-700 text-white text-xs px-2 py-[1px] rounded font-semibold flex items-center gap-1">
+            <div className="bg-gray-700 text-white text-xs px-2 py-[1px] rounded  flex items-center gap-1">
               <Eye size={11} />
               {views.toLocaleString()}
             </div>

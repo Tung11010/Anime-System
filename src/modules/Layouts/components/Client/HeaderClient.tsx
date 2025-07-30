@@ -1,4 +1,4 @@
-import { Search, User } from 'lucide-react';
+import { ChevronDown, Search, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface HeaderLayoutProps {
@@ -8,7 +8,7 @@ interface HeaderLayoutProps {
 const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
   return (
     <header className="bg-[#070720] h-17">
-      <div className="w-[90%] max-w-[1200px] h-full mx-auto flex flex-col md:flex-row items-center justify-between ">
+      <div className="w-[90%] max-w-[1200px] font-semibold h-full mx-auto flex flex-col md:flex-row items-center justify-between ">
         
         {/* Logo */}
         <div className="text-2xl font-bold text-white w-full md:w-auto px-4 md:px-0 flex-1 text-center">
@@ -24,8 +24,8 @@ const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
               <Link to="/" className="no-underline text-[#fff2f2]">Homepage</Link>
             </li>
             <li className="relative group">
-              <div className="text-[#cccccb] py-2 text-sm hover:text-white cursor-pointer flex items-center">
-                Categories
+              <div className="text-[#cccccb] font-semibold py-2 text-sm hover:text-white cursor-pointer flex items-center">
+                Categories <ChevronDown className="ml-2 mt-1" size={16} strokeWidth={2}/>
                 <Link to={'category'} className="fa-solid fa-angle-down text-xs text-[#676767] ml-1.5"></Link>
               </div>
               <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 absolute bg-[#f9f9f9] min-w-[120px] shadow-md z-10 top-full left-0">
