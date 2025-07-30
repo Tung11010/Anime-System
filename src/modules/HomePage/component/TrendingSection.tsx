@@ -62,7 +62,7 @@ const mockTrendingData = [
 const TrendingSection = () => {
   return (
     <section>
-      <SectionHeading title="TRENDING NOW" size="large" showViewAll />
+      <SectionHeading title="TRENDING NOW" size="large" showViewAll viewAllLink="category/trending-now" />
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
         {mockTrendingData.map((item) => (
           <VerticalCard key={item.id} {...item} />

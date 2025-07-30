@@ -62,7 +62,7 @@ const mockTrendingData = [
 const LiveActionSection = () => {
   return (
     <section>
-      <SectionHeading title="LIVE ACTION" size="large" showViewAll />
+      <SectionHeading title="LIVE ACTION" size="large" showViewAll viewAllLink="category/live-action" />
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
         {mockTrendingData.map((item) => (
           <VerticalCard key={item.id} {...item} />

@@ -8,7 +8,6 @@ import NewCommentSection from "../component/NewCommentSection";
 const HomePage = () => {
   return (
     <div className="w-full bg-[rgb(3,3,43)] flex flex-col items-center">
-      {/* Slide chiếm toàn màn hình */}
       <div className="w-full">
         <SlideHomePage />
       </div>

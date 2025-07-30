@@ -1,9 +1,11 @@
 import { MoveRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 type SectionHeadingProps = {
   title: string;
   size?: "small" | "medium" | "large";
   showViewAll?: boolean;
+  viewAllLink?: string;
   filters?: string[]; // ví dụ: ["Day", "Week", "Month", "Year"]
   activeFilter?: string;
   onFilterChange?: (filter: string) => void;
@@ -13,6 +15,7 @@ const SectionHeading = ({
   title,
   size = "medium",
   showViewAll = false,
+  viewAllLink,
   filters,
   activeFilter,
   onFilterChange,
@@ -49,11 +52,14 @@ const SectionHeading = ({
             </button>
           ))}
         </div>
-      ) : showViewAll ? (
-        <a href="#" className="text-[0.65rem] tracking-wider font-bold text-gray-200 hover:text-white flex items-center">
-            VIEW ALL
-            <MoveRight size={15} className="ml-2"/>
-        </a>
+      ) :  showViewAll ? (
+        <Link
+          to={viewAllLink || "#"}
+          className="text-[0.65rem] tracking-wider font-bold text-gray-200 hover:text-white flex items-center"
+        >
+          VIEW ALL
+          <MoveRight size={15} className="ml-2" />
+        </Link>
       ) : null}
     </div>
   );
