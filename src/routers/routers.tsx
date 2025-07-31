@@ -5,6 +5,7 @@ import { createHashRouter } from "react-router-dom";
 import { routesAdmin } from "./routes";
 import UserLayout from "@/modules/Layouts/components/Client/LayoutClient";
 import HomePage from "@/modules/HomePage/pages/HomePage";
+import Category from "@/modules/Category/pages/Categoty";
 
 export const routers = createHashRouter([
   {
@@ -15,6 +16,10 @@ export const routers = createHashRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "category/:slug", 
+        element: <Category/>,
       },
     ],
   },
