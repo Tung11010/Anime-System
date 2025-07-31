@@ -103,7 +103,7 @@ const CategorySection = () => {
   const title = sectionTitleMap[slug || ""] || "CATEGORY"
   return (
     <div className="space-y-4">
-      <SectionHeading title={title} />
+      <SectionHeading title={title} showOrderBy />
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {mockMovies.map((item) => (
             <VerticalCard key={item.id} {...item} />

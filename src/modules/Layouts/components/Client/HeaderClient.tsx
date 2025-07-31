@@ -12,9 +12,9 @@ const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
         
         {/* Logo */}
         <div className="text-2xl font-bold text-white w-full md:w-auto px-4 md:px-0 flex-1 text-center">
-          <a href="/" className="no-underline text-white">
+          <Link to="" className="no-underline text-white">
             Ani<span className="text-red-500">me</span>
-          </a>
+          </Link>
         </div>
 
         {/* Menu */}

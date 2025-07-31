@@ -20,7 +20,7 @@ const VerticalCard = ({
   title,
 }: VerticalCardProps) => {
   return (
-    <Link to={link} className="block cursor-pointer text-white w-[165px]">
+    <Link to={link} className="block cursor-pointer text-white w-[165px] z-0">
       {/* Container ảnh và overlay */}
       <div className="relative">
         {/* Episode badge */}

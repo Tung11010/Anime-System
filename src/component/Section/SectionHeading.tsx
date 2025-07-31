@@ -5,6 +5,7 @@ type SectionHeadingProps = {
   title: string;
   size?: "small" | "medium" | "large";
   showViewAll?: boolean;
+  showOrderBy?: boolean;
   viewAllLink?: string;
   filters?: string[]; // ví dụ: ["Day", "Week", "Month", "Year"]
   activeFilter?: string;
@@ -15,6 +16,7 @@ const SectionHeading = ({
   title,
   size = "medium",
   showViewAll = false,
+  showOrderBy = false,
   viewAllLink,
   filters,
   activeFilter,
@@ -27,9 +29,10 @@ const SectionHeading = ({
       ? "text-[1.1rem]"
       : "text-base";
 
-  return (
+ return (
+  <div className="w-full">
     <div
-      className={`flex items-center justify-between mb-4 ${
+      className={`flex items-center justify-between mb-2 ${
         filters && filters.length > 0 ? "w-[18rem]" : showViewAll ? "w-[33rem]" : "w-auto"
       }`}
     >
@@ -52,7 +55,7 @@ const SectionHeading = ({
             </button>
           ))}
         </div>
-      ) :  showViewAll ? (
+      ) : showViewAll ? (
         <Link
           to={viewAllLink || "#"}
           className="text-[0.65rem] tracking-wider font-bold text-gray-200 hover:text-white flex items-center"
@@ -60,9 +63,26 @@ const SectionHeading = ({
           VIEW ALL
           <MoveRight size={15} className="ml-2" />
         </Link>
+      ) : showOrderBy ? (
+        <div className="flex gap-3">
+          <span className="text-white text-xs mt-1">Order by:</span>
+          <select
+            className="text-xs px-3 py-1 rounded-sm bg-white text-black border border-gray-600 focus:outline-none"
+            name=""
+            id=""
+          >
+            <option value="">A-Z</option>
+            <option value="">Z-A</option>
+            <option value="">Newest</option>
+            <option value="">Oldest</option>
+          </select>
+        </div>
       ) : null}
     </div>
-  );
+    {showOrderBy && <div className="w-full h-[1px] bg-white opacity-20" />}
+  </div>
+);
+
 };
 
 export default SectionHeading;

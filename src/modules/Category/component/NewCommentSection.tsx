@@ -24,7 +24,7 @@ const mockNewCommentData = [
     thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/comment-2.jpg.webp",
   },
   {
-    id: 3,
+    id: 4,
     link: "#",
     title: "The Seven Deadly Sins",
     views: 19141,

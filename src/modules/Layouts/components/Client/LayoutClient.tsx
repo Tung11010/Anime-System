@@ -14,7 +14,7 @@ const UserLayout = () => {
         <ScrollToTop/>
         <OverlaySearch  isActive={showSearch} OnClose={() => setShowSearch(false)}/>
         <HeaderClient onSearchClick={() => setShowSearch(true)}/>
-        <Outlet />
+        <Outlet/>
         <FooterClient/>
     </div>
   );

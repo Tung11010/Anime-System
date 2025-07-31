@@ -146,7 +146,7 @@ const TopViewSection = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.3 }}
           className="flex flex-col gap-3 mb-6"
         >
           {data.map((movie) => (
