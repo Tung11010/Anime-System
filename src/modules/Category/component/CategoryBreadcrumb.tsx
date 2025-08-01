@@ -6,7 +6,9 @@ import { useParams } from "react-router-dom";
 const sectionTitleMap: Record<string, string> = {
     "trending-now": "Trending now",
     "popular-show": "Popular show",
-    "live-action": "Live action"
+    "live-action": "Live action",
+    "anime": "Anime",
+    "china-3d": "China 3d"
 };
 
 const CategoryBreadcrum = () => {

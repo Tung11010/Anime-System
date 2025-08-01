@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export interface VerticalCardProps {
   link: string;
   thumbnail: string;
-  episode?: string;
+  episode?: number;
   comments?: number;
   views?: number;
   title: string;
@@ -26,7 +26,7 @@ const VerticalCard = ({
         {/* Episode badge */}
         {episode && (
           <div className="absolute top-2 left-2 bg-red-600 text-white text-[11px] px-3 py-[1px] rounded w-fit z-10">
-            {episode}
+            {episode}/{episode}
           </div>
         )}
 

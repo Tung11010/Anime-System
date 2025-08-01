@@ -5,7 +5,7 @@ export interface MiniVerticalCardProps {
   thumbnail: string;
   title: string;
   views: number;
-  link: string; // thêm prop link
+  link: string; 
 }
 
 const MiniVerticalCard = ({

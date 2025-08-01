@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export interface HorizonCardProps {
   thumbnail: string;
-  episode: string;
+  episode: number;
   views: number;
   title: string;
   link: string;
@@ -29,7 +29,7 @@ const HorizonCard = ({
           {/* Episode + View */}
           <div className="absolute top-[6%] left-0 w-full flex justify-between px-3">
             <div className="bg-red-600 text-white text-xs px-2 py-[1px] rounded">
-              {episode}
+              {episode}/{episode}
             </div>
             <div className="bg-gray-700 text-white text-xs px-2 py-[1px] rounded  flex items-center gap-1">
               <Eye size={11} />
@@ -40,7 +40,7 @@ const HorizonCard = ({
       </Link>
 
       {/* Description không nằm trong Link */}
-      <div className="absolute bottom-0 left-0 w-full px-2 pb-2 pt-10 bg-gradient-to-t from-black/60 to-transparent text-white font-bold text-[16px] z-10">
+      <div className="absolute bottom-0 left-0 w-full px-2 pb-2 pt-10 bg-gradient-to-t from-black/60 to-transparent text-white font-bold text-[0.9rem] z-10">
         {title}
       </div>
     </div>

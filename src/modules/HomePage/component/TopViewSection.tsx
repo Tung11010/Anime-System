@@ -9,7 +9,7 @@ type FilterOption = "Day" | "Week" | "Month" | "Years";
 type Movie = {
   id: number;
   link: string;
-  episode: string;
+  episode: number;
   views: number;
   title: string;
   thumbnail: string;
@@ -20,7 +20,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
     {
       id: 1,
       link: "#",
-      episode: "11/98",
+      episode: 11,
       views: 9149,
       title: "Boruto: Naruto Next Generations",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/trending/trend-1.jpg",
@@ -28,7 +28,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
     {
       id: 2,
       link: "#",
-      episode: "9/12",
+      episode: 9,
       views: 7452,
       title: "Jujutsu Kaisen",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-2.jpg",
@@ -36,7 +36,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
     {
       id: 3,
       link: "#",
-      episode: "24/24",
+      episode: 24,
       views: 18500,
       title: "Attack on Titan",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-3.jpg",
@@ -44,7 +44,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
     {
       id: 4,
       link: "#",
-      episode: "220/220",
+      episode: 220,
       views: 50000,
       title: "Naruto Shippuden",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-4.jpg",
@@ -52,7 +52,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
       {
       id: 5,
       link: "#",
-      episode: "220/220",
+      episode: 220,
       views: 50000,
       title: "Naruto Shippuden",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-5.jpg",
@@ -63,7 +63,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
     {
       id: 1,
       link: "#",
-      episode: "24/24",
+      episode: 24,
       views: 18500,
       title: "Attack on Titan",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-3.jpg",
@@ -71,7 +71,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
     {
       id: 2,
       link: "#",
-      episode: "12/12",
+      episode: 12,
       views: 21000,
       title: "Demon Slayer",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-4.jpg",
@@ -81,7 +81,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
     {
       id: 1,
       link: "#",
-      episode: "12/12",
+      episode: 12,
       views: 21000,
       title: "Demon Slayer",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-4.jpg",
@@ -89,7 +89,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
      {
       id: 2,
       link: "#",
-      episode: "11/98",
+      episode: 11,
       views: 9149,
       title: "Boruto: Naruto Next Generations",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/trending/trend-1.jpg",
@@ -97,7 +97,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
     {
       id: 3,
       link: "#",
-      episode: "9/12",
+      episode: 9,
       views: 7452,
       title: "Jujutsu Kaisen",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-2.jpg",
@@ -107,7 +107,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
     {
       id: 1,
       link: "#",
-      episode: "220/220",
+      episode: 220,
       views: 50000,
       title: "Naruto Shippuden",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/trending/trend-3.jpg",
@@ -115,7 +115,7 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
     {
       id: 2,
       link: "#",
-      episode: "220/220",
+      episode: 220,
       views: 50000,
       title: "Naruto Shippuden",
       thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-3.jpg",

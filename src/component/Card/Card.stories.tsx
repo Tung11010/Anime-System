@@ -24,7 +24,7 @@ export const Vertical: StoryObj = {
     <VerticalCard
       link="/anime/boruto"
       thumbnail="https://i.redd.it/w6541yr1pamb1.jpg"
-      episode="11/98"
+      episode={98}
       comments={11}
       views={9149}
       title="Boruto: Naruto Next Generations"
@@ -37,7 +37,7 @@ export const Horizon: StoryObj = {
   render: () => (
     <HorizonCard
       link="#"
-      episode="11/98"
+      episode={98}
       views={9149}
       title="Boruto: Naruto Next Generations"
       thumbnail="https://i.redd.it/w6541yr1pamb1.jpg"

@@ -32,7 +32,7 @@ const SectionHeading = ({
  return (
   <div className="w-full">
     <div
-      className={`flex items-center justify-between mb-2 ${
+      className={`flex items-center justify-between mb-5 ${
         filters && filters.length > 0 ? "w-[18rem]" : showViewAll ? "w-[33rem]" : "w-auto"
       }`}
     >
