@@ -23,6 +23,19 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('assets/fonts/Oswald-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
   margin: 0;
@@ -36,7 +49,11 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Mulish', sans-serif;
+}
 
+html {
+  scroll-behavior: smooth;
 }
 
 article,

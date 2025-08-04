@@ -3,6 +3,19 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+        fontFamily: {
+        mulish: ["Mulish", "sans-serif"], // font mặc định cho Tailwind
+        oswald: ["Oswald", "sans-serif"], // font phụ (nếu có)
+      },
+      keyframes: {
+        slideUpFade: {
+          '0%': { opacity: 0, transform: 'translateY(20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        slideUpFade: 'slideUpFade 0.6s ease forwards',
+      },
       colors: {
         primary: {
           50: "#f0f9f0",
@@ -16,6 +29,7 @@ export default {
           800: "#1b5e20",
           900: "#0d4f0d",
         },
+        
         secondary: {
           50: "#e8f5e8",
           100: "#c8e6c8",

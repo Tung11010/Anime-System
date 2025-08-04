@@ -10,6 +10,7 @@ import FooterLayout from "./components/Footer";
 import HeaderLayout from "./components/Header";
 import { SidebarLayout } from "./components/SidebarLayout";
 import { ThemModeEnum, useThemModeStore } from "./hooks/useTheme";
+
 const { Content } = Layout;
 
 const MainLayout: FC = () => {
