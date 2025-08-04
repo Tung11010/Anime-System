@@ -7,6 +7,4 @@ export interface MoviePreview {
     title: string;
     img_url: string
 
-
-    
 }

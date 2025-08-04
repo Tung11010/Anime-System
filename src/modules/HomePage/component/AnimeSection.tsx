@@ -62,7 +62,9 @@ import { MoviePreview } from "../types";
 // ];
 
 const AnimeSection = () => {
-  const {data: movies} = useAnimeMovies()
+  const { data: movies } = useAnimeMovies()
+  console.log(movies);
+  
   return (
     <section>
       <SectionHeading title="ANIME" size="large" showViewAll viewAllLink="category/anime" />

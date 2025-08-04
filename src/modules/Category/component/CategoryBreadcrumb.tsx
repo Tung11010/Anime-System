@@ -8,7 +8,9 @@ const sectionTitleMap: Record<string, string> = {
     "popular-show": "Popular show",
     "live-action": "Live action",
     "anime": "Anime",
-    "china-3d": "China 3d"
+    "china-3d": "China 3d",
+    "romance": "Romance",
+    "tu-tien": "Tu tiên"
 };
 
 const CategoryBreadcrum = () => {

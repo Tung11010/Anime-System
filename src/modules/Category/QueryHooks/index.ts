@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMoviesByCategorySlug, getNewCommentMovies } from "../services/Category.services";
 
-export const useCategoryMoviesSlug = (slug : string) => {
+
+export const useCategoryMoviesSlug = (slug: string, page: number, limit?: number) => {
   return useQuery({
-    queryKey: ["live-action-movies", slug],
-    queryFn: () => getMoviesByCategorySlug(slug),
+    queryKey: ["category-movies", slug, page, limit],
+    queryFn: () => getMoviesByCategorySlug(slug, page, limit),
+    placeholderData: (prev) => prev
   });
 };
 

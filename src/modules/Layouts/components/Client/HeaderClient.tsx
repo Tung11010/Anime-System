@@ -29,12 +29,12 @@ const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
                 <Link to={'category'} className="fa-solid fa-angle-down text-xs text-[#676767] ml-1.5"></Link>
               </div>
               <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 absolute bg-[#f9f9f9] min-w-[120px] shadow-md z-10 top-full left-0">
-                <Link to="cateogry" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Categories</Link>
-                <Link to="anime-detail" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Anime Detail</Link>
-                <Link to="anime-watching" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Anime Watching</Link>
-                <Link to="blog-detail" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Blog Detail</Link>
-                <Link to="sign-up" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Sign Up</Link>
-                <Link to="login" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Login</Link>
+                <Link to="category/anime" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Anime</Link>
+                <Link to="category/live-action" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Live Action</Link>
+                <Link to="category/china-3d" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">China 3D</Link>
+                <Link to="category/romance" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Romance</Link>
+                <Link to="category/tu-tien" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Tu tiên</Link>
+                <Link to="category/co-trang" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Cổ trang</Link>
               </div>
             </li>
             <li><a href="#" className="no-underline text-[#cccccb] px-2 hover:text-white">Our blog</a></li>
