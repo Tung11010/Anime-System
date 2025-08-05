@@ -5,6 +5,7 @@ export const CardWrapper = styled.div`
   border-radius: 12px;
   padding: 16px;
   color: #fff;
+  width: 600px;
 `;
 
 export const CardHeader = styled.div`
@@ -17,4 +18,5 @@ export const CardHeader = styled.div`
 export const CardContent = styled.div`
   font-size: 15px;
   color: #bdbdbd;
+  
 `;

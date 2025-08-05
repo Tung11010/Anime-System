@@ -1,5 +1,5 @@
-import React from "react";
-import AnimeWatching from "./AnimeWatching";
+
+import AnimeWatching from "./pages/AnimeWatching";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof AnimeWatching> = {

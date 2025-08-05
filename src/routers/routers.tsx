@@ -4,7 +4,10 @@ import Layouts from "@/modules/Layouts";
 import { createHashRouter } from "react-router-dom";
 import { routesAdmin } from "./routes";
 
+
+
 export const routers = createHashRouter([
+  
   {
     path: pathRoutes.dashboard,
     element: <Layouts />,
@@ -19,4 +22,6 @@ export const routers = createHashRouter([
     },
     errorElement: <FiveHundred />,
   },
+
+  
 ]);
