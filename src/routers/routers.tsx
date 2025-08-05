@@ -3,16 +3,18 @@ import { FiveHundred } from "@/modules/Errors";
 import Layouts from "@/modules/Layouts";
 import { createHashRouter } from "react-router-dom";
 import { routesAdmin } from "./routes";
-
-
-
+import AnimeDetail from "@/modules/AnimeDetail/pages/AnimeDetail";
 export const routers = createHashRouter([
-  
+
   {
     path: pathRoutes.dashboard,
     element: <Layouts />,
     errorElement: <FiveHundred />,
     children: routesAdmin,
+  },
+    {
+    path: "/",
+    element: <AnimeDetail />,
   },
   {
     path: "*",

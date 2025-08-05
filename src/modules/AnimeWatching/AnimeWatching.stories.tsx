@@ -1,6 +1,6 @@
 
 import AnimeWatching from "./pages/AnimeWatching";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof AnimeWatching> = {
   title: "Modules/AnimeWatching/AnimeWatching",

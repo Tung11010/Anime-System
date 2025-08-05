@@ -1,16 +1,38 @@
 import React from 'react';
-import { FaComment, FaEye, FaStar, FaStarHalf, FaHeart, FaArrowRight } from 'react-icons/fa';
+import { FaComment, FaEye, FaStar, FaStarHalf } from 'react-icons/fa';
 
-const AnimeDetails: React.FC = () => {
+interface AnimeInfoType {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  type?: string;
+  studios?: string;
+  dateAired?: string;
+  status?: string;
+  genre?: string;
+  duration?: string;
+  rating?: string;
+  source?: string;
+  episodes?: string;
+  producers?: string;
+}
+
+interface AnimeDetailsProps {
+  animeInfo: AnimeInfoType | null;
+}
+
+const AnimeDetails: React.FC<AnimeDetailsProps> = ({ animeInfo }) => {
+  if (!animeInfo) return <div className="text-white p-10">Loading...</div>;
+
   return (
     <div className="w-full p-10 flex flex-col items-center bg-[#0c0921]">
       <div className="w-full flex gap-12 justify-center">
-        {/* Poster và Content Section (thụt vào bên trái) */}
         <div className="ml-20 flex gap-12 w-full max-w-[calc(100%-80px)]">
           {/* Poster Section */}
           <div className="relative w-60 min-w-60 bg-[#181a36] rounded-2xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] flex flex-col items-center h-auto">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRaRFVBKcsgX70ImxWwBXr9YEDbHO-iY1bBA&s"
+              src={animeInfo.image}
               alt="Poster"
               className="w-full h-auto rounded-2xl object-cover max-h-[500px]"
             />
@@ -29,7 +51,7 @@ const AnimeDetails: React.FC = () => {
           {/* Content Section */}
           <div className="flex-1 flex flex-col justify-start">
             <div className="flex items-center mb-10 space-x-7">
-              <h1 className="text-3xl font-bold text-white">Fate Stay Night: Unlimited Blade</h1>
+              <h1 className="text-3xl font-bold text-white">{animeInfo.title}</h1>
               <div className="flex items-center gap-1 text-[#ffb400] text-[22px]">
                 <FaStar />
                 <FaStar />
@@ -39,40 +61,60 @@ const AnimeDetails: React.FC = () => {
               </div>
               <div className="text-base text-[#ccc] ml-2">1.029 Votes</div>
             </div>
-            <div className="text-sm text-[#bdbdbd] mb-4">
-              フェイト／ステイナイト, Feito / sutei naito
-            </div>
+            <div className="text-sm text-[#bdbdbd] mb-4">フェイト／ステイナイト, Feito / sutei naito</div>
             <div className="text-base text-[#e0e0e0] mb-6 leading-relaxed w-full max-w-[800px]">
-              Every human inhabiting the world of Alcia is branded by a "Count" or a number written on their body. For
-              Hina's mother, her total drops to 0 and she's pulled into the Abyss, never to be seen again. But her mother's
-              last words send Hina on a quest to find a legendary hero from the Waste War - the fabled Ace!
+              {animeInfo.description}
             </div>
-            <div className="flex gap-10 mb-6">
-              <div>
+            <div className="flex justify-start mb-6">
+              <div className="grid grid-cols-2 gap-x-20">
                 <ul className="list-none p-0 m-0">
-                  <li key="type" className="text-[15px] mb-2">
+                  <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Type:</span>
-                    <span className="text-white">TV Series</span>
+                    <span className="text-white">{animeInfo.type || 'TV Series'}</span>
                   </li>
-                  <li key="studios" className="text-[15px] mb-2">
+                  <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Studios:</span>
-                    <span className="text-white">Lerche</span>
+                    <span className="text-white">{animeInfo.studios || 'Lerche'}</span>
                   </li>
-                  <li key="date" className="text-[15px] mb-2">
+                  <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Date aired:</span>
-                    <span className="text-white">Oct 02, 2019 to ?</span>
+                    <span className="text-white">{animeInfo.dateAired || 'Oct 02, 2019 to ?'}</span>
                   </li>
-                  <li key="status" className="text-[15px] mb-2">
+                  <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Status:</span>
-                    <span className="text-white">Airing</span>
+                    <span className="text-white">{animeInfo.status || 'Airing'}</span>
                   </li>
-                  <li key="genre" className="text-[15px] mb-2">
+                  <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Genre:</span>
-                    <span className="text-white">Action, Adventure, Fantasy, Magic</span>
+                    <span className="text-white">{animeInfo.genre || 'Action, Adventure, Fantasy, Magic'}</span>
+                  </li>
+                </ul>
+
+                <ul className="list-none p-0 m-0">
+                  <li className="text-[15px] mb-2">
+                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Duration:</span>
+                    <span className="text-white">{animeInfo.duration || '24 min per ep'}</span>
+                  </li>
+                  <li className="text-[15px] mb-2">
+                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Rating:</span>
+                    <span className="text-white">{animeInfo.rating || 'PG-13'}</span>
+                  </li>
+                  <li className="text-[15px] mb-2">
+                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Source:</span>
+                    <span className="text-white">{animeInfo.source || 'Manga'}</span>
+                  </li>
+                  <li className="text-[15px] mb-2">
+                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Episodes:</span>
+                    <span className="text-white">{animeInfo.episodes || '12'}</span>
+                  </li>
+                  <li className="text-[15px] mb-2">
+                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Producers:</span>
+                    <span className="text-white">{animeInfo.producers || 'Aniplex'}</span>
                   </li>
                 </ul>
               </div>
             </div>
+
           </div>
         </div>
       </div>
