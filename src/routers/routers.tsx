@@ -2,11 +2,14 @@ import { pathRoutes } from "@/constants";
 import { FiveHundred } from "@/modules/Errors";
 import Layouts from "@/modules/Layouts";
 import { createHashRouter } from "react-router-dom";
+
 import { routesAdmin, routesUser } from "./routes";
 import UserLayout from "@/modules/Layouts/components/Client/LayoutClient";
 
 
+
 export const routers = createHashRouter([
+
   {
     path: "/",
     element: <UserLayout />,
@@ -27,4 +30,6 @@ export const routers = createHashRouter([
     },
     errorElement: <FiveHundred />,
   },
+
+  
 ]);
