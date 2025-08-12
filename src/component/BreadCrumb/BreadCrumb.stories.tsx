@@ -1,15 +1,13 @@
-
 import BreadCrumb from "./BreadCrumb";
 
 export default {
   title: "Components/BreadCrumb",
   component: BreadCrumb,
+  tags: ["autodocs"],
 };
 
-export const LoginBreadCrumb = () => (
-  <div className="w-full min-h-screen bg-[#0B0C2A] flex items-center justify-center">
-    <div className="w-full">
-      <BreadCrumb />
-    </div>
-  </div>
-);
+export const Login = () => <BreadCrumb title="Login" />;
+
+export const SignUp = () => <BreadCrumb title="Sign Up" />;
+
+export const OurBlog = () => <BreadCrumb title="Our Blog" />;

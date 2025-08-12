@@ -11,7 +11,9 @@ const FacebookButton: React.FC<FacebookButtonProps> = ({ onClick, className = ""
     onClick={onClick}
     className={`bg-[#4c6eb1] text-white font-semibold text-base tracking-widest px-12 py-4 rounded-none shadow-none outline-none block mx-auto flex items-center justify-center gap-4 ${className}`}
     style={{ letterSpacing: "0.2em" }}
+    type="button"
   >
+
     {/* Facebook SVG icon */}
     <svg
       xmlns="http://www.w3.org/2000/svg"
