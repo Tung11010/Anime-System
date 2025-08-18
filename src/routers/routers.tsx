@@ -12,11 +12,19 @@ export const routers = createHashRouter([
     children: routesAdmin,
   },
   {
-    path: "*",
+    path: "/login",
     lazy: async () => {
-      const { LoginPage } = await import("@/modules/pages/Login");
+      const { LoginPage } = await import("@/modules/Auth/Login");
       return { element: <LoginPage /> };
     },
     errorElement: <FiveHundred />,
   },
+  {
+    path: "/signup",
+    lazy: async () => {
+      const { SignUpPage } = await import("@/modules/Auth/SignUp");
+      return { element: <SignUpPage /> };
+    },
+    errorElement: <FiveHundred />,
+  }
 ]);

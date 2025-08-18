@@ -1,38 +1,75 @@
-import React from "react";
-import BreadCrumb from "../../component/BreadCrumb/BreadCrumb";
+import React, { useState } from "react";
+import BreadCrumb from "../../component/Banner/BreadCrumb";
 import EmailInput from "../../component/input/email";
 import PasswordInput from "../../component/input/password";
 import LoginButton from "../../component/Buttons/LoginButton";
 import FbButton from "../../component/Buttons/FbButton";
 import GgButton from "../../component/Buttons/GgButton";
 import TwitterButton from "../../component/Buttons/TwitterButton";
+import { Link } from "react-router-dom";
+import { loginUser } from "./services/authService";
+import { toast } from "react-toastify";
 
 export const LoginPage: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+    try {
+      const res = await loginUser({ email, password });
+      toast.success("Login successful!");
+      console.log("Login success:", res);
+      
+    } catch (err: any) {
+      toast.error(`${err.message}`);
+      
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0B0C2A] w-full">
       <BreadCrumb title="Login" />
       <div className="flex flex-col items-center justify-center w-full px-2 py-10">
         <div className="bg-transparent w-full max-w-4xl flex flex-col md:flex-row md:space-x-8 md:bg-[#0B0C2A] md:rounded-lg md:shadow-none">
+          
           {/* Login Form */}
           <div className="flex-1 flex flex-col items-center md:items-start md:pr-8">
             <h2 className="text-white text-2xl font-bold mb-6 w-full">Login</h2>
-            <form className="w-full max-w-sm space-y-4">
-              <EmailInput />
-              <PasswordInput />
+            <form className="w-full max-w-sm space-y-4" onSubmit={handleLogin}>
+              <EmailInput value={email} onChange={(e: any) => setEmail(e.target.value)} />
+              <PasswordInput value={password} onChange={(e: any) => setPassword(e.target.value)} />
               <div className="flex items-center justify-between mt-2">
-                <LoginButton className="bg-[#F44336] hover:bg-[#d32f2f] text-white font-bold px-6 py-2 rounded min-w-[140px]" text="LOGIN NOW" />
+                <LoginButton
+                  className="bg-[#F44336] hover:bg-[#d32f2f] text-white font-bold px-6 py-2 rounded min-w-[140px]"
+                  text={loading ? "Processing..." : "LOGIN NOW"}
+                />
                 <a href="#" className="text-xs text-white ml-2 hover:underline">Forgot Your Password?</a>
               </div>
             </form>
+            {message && <p className="text-white mt-3">{message}</p>}
           </div>
+
           {/* Divider */}
           <div className="hidden md:block w-px bg-gray-600 mx-4" />
+
           {/* Register */}
           <div className="flex-1 flex flex-col items-center md:items-start md:pl-8 mt-8 md:mt-0">
             <h2 className="text-white text-2xl font-bold mb-6 w-full">Don’t Have An Account?</h2>
-            <button className="bg-[#F44336] hover:bg-[#d32f2f] text-white font-bold px-6 py-2 rounded mb-8 min-w-[140px]">REGISTER NOW</button>
+            <Link to="/signup">
+              <button className="bg-[#F44336] hover:bg-[#d32f2f] text-white font-bold px-6 py-2 rounded mb-8 min-w-[140px]">
+                REGISTER NOW
+              </button>
+            </Link>
           </div>
         </div>
+
         {/* Social Login */}
         <div className="w-full max-w-sm mt-10">
           <div className="flex items-center mb-4">
@@ -51,4 +88,4 @@ export const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage; 
+export default LoginPage;
