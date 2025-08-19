@@ -5,7 +5,7 @@ import SectionComment from '../component/SectionComment';
 
 const AnimeDetail: React.FC = () => {
   return (
-    <div className="bg-[#0c0921]">
+    <div className="bg-[rgb(3,3,43)]">
       <SectionAnimeInfo />
       <SectionComment />
     </div>

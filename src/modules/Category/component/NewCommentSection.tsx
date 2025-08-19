@@ -1,5 +1,5 @@
-import { MiniVerticalCard } from "@/component/Card";
-import { SectionHeading } from "@/component/Section";
+import { MiniVerticalCard } from "@/components/Card";
+import { SectionHeading } from "@/components/Section";
 import { useNewCommentMovies } from "../QueryHooks";
 import { MoviePreview } from "../types";
 
@@ -46,7 +46,7 @@ const NewCommentSection = () => {
         {movies?.map((movie: MoviePreview) => (
           <MiniVerticalCard
             key={movie.id}
-            link={movie.link}
+            slug={movie.slug}
             title={movie.title}
             views={movie.viewsCount}
             thumbnail={movie.img_url}

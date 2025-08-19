@@ -1,6 +1,6 @@
 // src/modules/HomePage/components/TrendingSection.tsx
-import { VerticalCard } from "@/component/Card";
-import { SectionHeading } from "@/component/Section";
+import { VerticalCard } from "@/components/Card";
+import { SectionHeading } from "@/components/Section";
 import { useAnimeMovies } from "../QueryHooks";
 import { MoviePreview } from "../types";
 
@@ -65,6 +65,7 @@ const AnimeSection = () => {
   const { data: movies } = useAnimeMovies()
   console.log(movies);
   
+  
   return (
     <section>
       <SectionHeading title="ANIME" size="large" showViewAll viewAllLink="category/anime" />
@@ -72,7 +73,7 @@ const AnimeSection = () => {
         {movies?.map((item: MoviePreview) => (
           <VerticalCard 
             key={item.id}
-            link={""}
+            slug={item.slug}
             title={item.title}
             views={item.viewsCount}
             thumbnail={item.img_url}

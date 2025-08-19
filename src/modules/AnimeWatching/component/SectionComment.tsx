@@ -1,71 +1,72 @@
 // components/SectionComment.tsx
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AvatarCircle from "@/components/Button/buttonAvatar";
 import { CommentCard } from "@/components/Card";
 import InputComment from "@/components/Input/InputComment";
 import ButtonReview from "@/components/Button/buttonReview";
+import { useParams } from "react-router-dom";
+import { useMovieWatchingSlug } from "../QueryHooks";
 
-interface CommentType {
-  avatar: string;
-  username: string;
-  time: string;
-  content: string;
-}
 
 const SectionComment: React.FC = () => {
-  const [comments, setComments] = useState<CommentType[]>([]);
+  const { slug } = useParams();
+  const { data } = useMovieWatchingSlug(slug || "");
+  const comments = data?.comments ?? [];
   const [comment, setComment] = useState("");
+  
 
-  useEffect(() => {
-    // Giả lập fetch comment
-    const fetchComments = async () => {
-      const data: CommentType[] = [
-        {
-          avatar: "https://i.pravatar.cc/48?img=1",
-          username: "Chris Curry",
-          time: "1 Hour ago",
-          content:
-            'whachikan Just noticed that someone categorized this as belonging to the genre "demons" LOL',
-        },
-        {
-          avatar: "https://i.pravatar.cc/48?img=2",
-          username: "Lewis Mann",
-          time: "5 Hour ago",
-          content: "Finally it came out ages ago",
-        },
-        {
-          avatar: "https://i.pravatar.cc/48?img=3",
-          username: "Louis Tyler",
-          time: "20 Hour ago",
-          content: "Where is the episode 15 ? Slow update! Tch",
-        },
-      ];
-      setComments(data);
-    };
+  // Số comment hiển thị ban đầu
+  const [visibleCount, setVisibleCount] = useState(5);
 
-    fetchComments();
-  }, []);
+  // Xử lý khi bấm "Xem thêm"
+  const handleShowMore = () => {
+    setVisibleCount((prev) => prev + 5); // Mỗi lần +5 comment
+  };
 
   return (
     <>
-    
       <div className="px-7 mt-12">
-        <span className="text-white font-extrabold text-l tracking-wide uppercase">Reviews</span>
-      </div>
-      <div className="mt-12 flex flex-col gap-6 px-7 pb-10">
-        {comments.map((c, idx) => (
-          <div key={idx} className="flex items-start gap-4">
-            <AvatarCircle src={c.avatar} size={56} />
-            <CommentCard username={c.username} time={c.time} content={c.content} />
-          </div>
-        ))}
+        <span className="text-white font-extrabold text-l tracking-wide uppercase">
+          Reviews
+        </span>
       </div>
 
+      {/* Danh sách comment */}
+      <div className="mt-12 flex flex-col gap-6 px-7 pb-10">
+        {comments.slice(0, visibleCount).map((c: any, idx: number) => (
+          <div key={idx} className="flex items-start gap-4">
+            <AvatarCircle src={c.user.avatar} size={56} />
+            <CommentCard
+              username={c.user.username}
+              time={c.time}
+              content={c.content}
+            />
+          </div>
+        ))}
+
+        {/* Nút Xem thêm */}
+        {visibleCount < comments.length && (
+          <button
+            onClick={handleShowMore}
+            className="self-center mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
+          >
+            Xem thêm
+          </button>
+        )}
+      </div>
+
+      {/* Ô nhập comment */}
       <div className="px-7 pt-2 pb-3">
-        <span className="text-white font-extrabold text-l tracking-wide uppercase">Your Comment</span>
+        <span className="text-white font-extrabold text-l tracking-wide uppercase">
+          Your Comment
+        </span>
       </div>
       <div className="px-7 pb-12">
-        <InputComment value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Your Comment" />
+        <InputComment
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Your Comment"
+        />
         <div className="mt-6">
           <ButtonReview />
         </div>

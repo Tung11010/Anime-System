@@ -1,7 +1,7 @@
 import SlideHomePage from "../component/SlideHomePage";
 // import TrendingSection from "../component/AnimeSection";
 // import PopularSection from "../component/China3dSection";
-import LiveActionSection from "../component/LiveActionSection";
+import AddRecentlySection from "../component/AddRecentlySection";
 import TopViewSection from "../component/TopViewSection";
 import NewCommentSection from "../component/NewCommentSection";
 import AnimeSection from "../component/AnimeSection";
@@ -25,7 +25,7 @@ const HomePage = () => {
               <China3dSection />
             </section>
             <section>
-              <LiveActionSection />
+              <AddRecentlySection />
             </section>
           </div>
 

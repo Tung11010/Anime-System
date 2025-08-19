@@ -3,7 +3,7 @@ export interface MoviePreview {
     episodesCount: number;
     commentsCount: number;
     id: number;
-    link: string;
+    slug: string;
     title: string;
     img_url: string
 

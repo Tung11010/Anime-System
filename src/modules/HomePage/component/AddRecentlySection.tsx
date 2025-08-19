@@ -1,8 +1,8 @@
 // src/modules/HomePage/components/TrendingSection.tsx
-import { VerticalCard } from "@/component/Card";
-import { SectionHeading } from "@/component/Section";
-import { useLiveActionMovies } from "../QueryHooks";
+import { VerticalCard } from "@/components/Card";
+import { SectionHeading } from "@/components/Section";
 import { MoviePreview } from "../types";
+import { useAddRecentlyMovies } from "../QueryHooks";
 
 
 
@@ -63,17 +63,19 @@ import { MoviePreview } from "../types";
 //   },
 // ];
 
-const LiveActionSection = () => {
-  const { data: movies } = useLiveActionMovies();
+const AddRecentlySection = () => {
+  const { data: movies } = useAddRecentlyMovies();
+  console.log(movies);
+  
   
   return (
     <section>
-      <SectionHeading title="LIVE ACTION" size="large" showViewAll viewAllLink="category/live-action" />
+      <SectionHeading title="ADD RECENTLY SHOWS" size="large" showViewAll viewAllLink="category/add-recently" />
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
         {movies?.map((item: MoviePreview) => (
           <VerticalCard 
             key={item.id}
-            link={""}
+            slug={item.slug}
             title={item.title}
             views={item.viewsCount}
             thumbnail={item.img_url}
@@ -87,4 +89,4 @@ const LiveActionSection = () => {
   );
 };
 
-export default LiveActionSection;
+export default AddRecentlySection;
