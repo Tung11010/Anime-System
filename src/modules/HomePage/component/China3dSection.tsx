@@ -1,5 +1,5 @@
-import { VerticalCard } from "@/component/Card";
-import { SectionHeading } from "@/component/Section";
+import { VerticalCard } from "@/components/Card";
+import { SectionHeading } from "@/components/Section";
 import { useChina3dMovies } from "../QueryHooks";
 import { MoviePreview } from "../types";
 
@@ -70,7 +70,7 @@ const China3dSection = () => {
         {movies?.map((item: MoviePreview) => (
            <VerticalCard 
             key={item.id}
-            link={""}
+            slug={item.slug}
             title={item.title}
             views={item.viewsCount}
             thumbnail={item.img_url}

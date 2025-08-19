@@ -6,6 +6,7 @@ interface PaginationProps {
 
 const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  
 
   return (
     <div className="flex items-center gap-2 mt-2">

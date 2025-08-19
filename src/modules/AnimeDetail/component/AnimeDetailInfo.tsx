@@ -5,17 +5,20 @@ interface AnimeInfoType {
   id: number;
   title: string;
   description: string;
-  image: string;
+  img_url: string;
   type?: string;
-  studios?: string;
+  studio?: string;
   dateAired?: string;
   status?: string;
-  genre?: string;
+  genres?: [];
   duration?: string;
   rating?: string;
-  source?: string;
   episodes?: string;
   producers?: string;
+  score?: string;
+  quality?: string;
+  totalViews?: string;
+  totalComments?: string;
 }
 
 interface AnimeDetailsProps {
@@ -26,27 +29,30 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({ animeInfo }) => {
   if (!animeInfo) return <div className="text-white p-10">Loading...</div>;
 
   return (
-    <div className="w-full p-10 flex flex-col items-center bg-[#0c0921]">
+    <div className="w-full p-10 flex flex-col items-center">
       <div className="w-full flex gap-12 justify-center">
         <div className="ml-20 flex gap-12 w-full max-w-[calc(100%-80px)]">
           {/* Poster Section */}
-          <div className="relative w-60 min-w-60 bg-[#181a36] rounded-2xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] flex flex-col items-center h-auto">
+         <div className="w-60 min-w-60 overflow-hidden flex flex-col items-center shadow-2xl">
+          {/* Bọc ảnh và icon vào 1 div.relative */}
+          <div className="relative w-full">
             <img
-              src={animeInfo.image}
+              src={animeInfo.img_url}
               alt="Poster"
-              className="w-full h-auto rounded-2xl object-cover max-h-[500px]"
+              className="w-full rounded-md object-cover h-[25rem]" 
             />
-            <div className="flex justify-between w-[90%] my-3">
-              <div className="bg-[#23244a] rounded-lg px-2.5 py-1 flex items-center gap-1 text-sm">
-                <FaComment />
-                <span className="text-white">11</span>
+            <div className="flex justify-between w-[90%] absolute bottom-4 left-1/2 -translate-x-1/2">
+              <div className="bg-[#3d3d3d] rounded-[0.25rem] shadow-lg px-2.5 flex items-center gap-1 text-sm">
+                <FaComment color={'white'} />
+                <span className="text-white">{animeInfo.totalComments}</span>
               </div>
-              <div className="bg-[#23244a] rounded-lg px-2.5 py-1 flex items-center gap-1 text-sm">
-                <FaEye />
-                <span className="text-white">9191</span>
+              <div className="bg-[#3d3d3d] rounded-[0.25rem] shadow-lg px-2.5 flex items-center gap-1 text-sm">
+                <FaEye color="white" />
+                <span className="text-white">{animeInfo.totalViews}</span>
               </div>
             </div>
           </div>
+        </div>
 
           {/* Content Section */}
           <div className="flex-1 flex flex-col justify-start">
@@ -70,11 +76,11 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({ animeInfo }) => {
                 <ul className="list-none p-0 m-0">
                   <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Type:</span>
-                    <span className="text-white">{animeInfo.type || 'TV Series'}</span>
+                    <span className="text-white">{animeInfo.type || 'Null'}</span>
                   </li>
                   <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Studios:</span>
-                    <span className="text-white">{animeInfo.studios || 'Lerche'}</span>
+                    <span className="text-white">{animeInfo.studio || 'Null'}</span>
                   </li>
                   <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Date aired:</span>
@@ -82,34 +88,34 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({ animeInfo }) => {
                   </li>
                   <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Status:</span>
-                    <span className="text-white">{animeInfo.status || 'Airing'}</span>
+                    <span className="text-white">{animeInfo.status || 'Null'}</span>
                   </li>
                   <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Genre:</span>
-                    <span className="text-white">{animeInfo.genre || 'Action, Adventure, Fantasy, Magic'}</span>
+                    <span className="text-white">{animeInfo.genres?.join(', ') || 'Action, Adventure, Fantasy, Magic'}</span>
                   </li>
                 </ul>
 
                 <ul className="list-none p-0 m-0">
                   <li className="text-[15px] mb-2">
-                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Duration:</span>
-                    <span className="text-white">{animeInfo.duration || '24 min per ep'}</span>
+                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Score:</span>
+                    <span className="text-white">{animeInfo.score || 'null'}</span>
                   </li>
                   <li className="text-[15px] mb-2">
                     <span className="text-[#bdbdbd] inline-block min-w-[100px]">Rating:</span>
-                    <span className="text-white">{animeInfo.rating || 'PG-13'}</span>
+                    <span className="text-white">{animeInfo.rating || ''}</span>
                   </li>
                   <li className="text-[15px] mb-2">
-                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Source:</span>
-                    <span className="text-white">{animeInfo.source || 'Manga'}</span>
+                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Duration:</span>
+                    <span className="text-white">{animeInfo.duration|| ''}</span>
                   </li>
                   <li className="text-[15px] mb-2">
-                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Episodes:</span>
-                    <span className="text-white">{animeInfo.episodes || '12'}</span>
+                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Quality:</span>
+                    <span className="text-white">{animeInfo.quality || '12'}</span>
                   </li>
                   <li className="text-[15px] mb-2">
-                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Producers:</span>
-                    <span className="text-white">{animeInfo.producers || 'Aniplex'}</span>
+                    <span className="text-[#bdbdbd] inline-block min-w-[100px]">Views:</span>
+                    <span className="text-white">{animeInfo.totalViews}</span>
                   </li>
                 </ul>
               </div>

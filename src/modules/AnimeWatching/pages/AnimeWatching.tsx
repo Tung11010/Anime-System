@@ -5,7 +5,7 @@ import SectionComment from "../component/SectionComment";
 
 const AnimeWatching: React.FC = () => {
   return (
-    <div className="flex justify-center items-center w-full bg-[#101136]">
+    <div className="flex justify-center items-center w-full bg-[rgb(3,3,43)]">
       <div>
         <SectionEpisode />
         <SectionComment />

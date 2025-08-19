@@ -1,82 +1,72 @@
-// src/modules/AnimeDetail/components/SectionComment.tsx
-import React, { useEffect, useState } from 'react';
 import AvatarCircle from '../../../components/Button/buttonAvatar';
 import { CommentCard } from '../../../components/Card';
 import InputComment from '../../../components/Input/InputComment';
 import ButtonReview from '../../../components/Button/buttonReview';
-
-interface CommentType {
-  avatar: string;
-  username: string;
-  time: string;
-  content: string;
-}
+import { useParams } from 'react-router-dom';
+import { useMovieDetailSlug } from '../QueryHooks';
+import { useState } from 'react';
+import { Comment } from '../types';
 
 const SectionComment: React.FC = () => {
-  const [comments, setComments] = useState<CommentType[]>([]);
-  const [comment, setComment] = useState("");
+  const { slug } = useParams();
+  const { data } = useMovieDetailSlug(slug || '');
+  const comments = data?.comments ?? [];
+  const [comment, setComment] = useState('');
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      // Simulate API call
-      const data: CommentType[] = [
-        {
-          avatar: "https://i.pravatar.cc/48?img=1",
-          username: "Chris Curry",
-          time: "1 Hour ago",
-          content: 'whachikan Just noticed that someone categorized this as belonging to the genre "demons" LOL',
-        },
-        {
-          avatar: "https://i.pravatar.cc/48?img=2",
-          username: "Lewis Mann",
-          time: "5 Hour ago",
-          content: "Finally it came out ages ago",
-        },
-        {
-          avatar: "https://i.pravatar.cc/48?img=3",
-          username: "Louis Tyler",
-          time: "20 Hour ago",
-          content: "Where is the episode 15 ? Slow update! Tch",
-        },
-        
-      ];
-      setComments(data);
-    };
-
-    fetchComments();
-  }, []);
+  // 👇 Giới hạn số comment ban đầu
+  const [visibleCount, setVisibleCount] = useState(5);
 
   return (
-
-    
-    <div className="ml-[100px] bg-[#0c0921]">
+    <div className="ml-[100px] ">
+      {/* Reviews title */}
       <div className="px-7 mt-12">
-        <span className="text-white font-extrabold text-xl tracking-wide uppercase">Reviews</span>
+        <span className="text-white font-extrabold text-xl tracking-wide uppercase">
+          Reviews
+        </span>
       </div>
+
+      {/* List comments */}
       <div className="mt-12 flex flex-col gap-6 px-7 pb-10">
-        {comments.map((c, idx) => (
+        {comments.slice(0, visibleCount).map((c: Comment, idx: number) => (
           <div key={idx} className="flex items-start gap-4">
-            <AvatarCircle src={c.avatar} size={56} />
-            <CommentCard username={c.username} time={c.time} content={c.content} />
+            <AvatarCircle src={c.user.avatar} size={56} />
+            <CommentCard
+              username={c.user.username}
+              time={c.timeAgo}
+              content={c.content}
+            />
           </div>
         ))}
+
+        {/* Nút Xem thêm */}
+        {visibleCount < comments.length && (
+          <button
+            onClick={() => setVisibleCount(prev => prev + 5)}
+           className="self-center mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
+          >
+            Xem thêm
+          </button>
+        )}
       </div>
+
+      {/* Input comment */}
       <div className="px-7 pt-2 pb-3">
-        <span className="text-white font-extrabold text-xl tracking-wide uppercase">Your Comment</span>
+        <span className="text-white font-extrabold text-xl tracking-wide uppercase">
+          Your Comment
+        </span>
       </div>
+
       <div className="px-7 pb-12">
         <InputComment
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="Your Comment"
-          
         />
         <div className="mt-6">
           <ButtonReview />
         </div>
       </div>
     </div>
-   
   );
 };
 

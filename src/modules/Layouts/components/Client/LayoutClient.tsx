@@ -1,9 +1,10 @@
-import OverlaySearch from "@/component/Search/OverlaySearch";
+import OverlaySearch from "@/components/Search/OverlaySearch";
 import { useEffect, useState } from "react";
 import HeaderClient from "./HeaderClient";
 import FooterClient from "./FooterClient";
 import { Outlet } from "react-router-dom";
-import ScrollToTop from "@/component/Scroll/ScrollToTop";
+import ScrollToTop from "@/components/Scroll/ScrollToTop";
+
 
 
 
@@ -22,7 +23,7 @@ const UserLayout = () => {
   }, [showSearch]);
   return (
     <div className="min-h-screen overflow-x-hidden">
-        <ScrollToTop/>
+        <ScrollToTop />
         <OverlaySearch  isActive={showSearch} OnClose={() => setShowSearch(false)}/>
         <HeaderClient onSearchClick={() => setShowSearch(true)}/>
         <Outlet/>

@@ -3,7 +3,7 @@ import AnimeWatching from "./pages/AnimeWatching";
 
 export const AnimeWatchingRoutes: RouteObject[] = [
   {
-    path: "/anime-watching",
+    path: "/movie-watching/:slug",
     element: <AnimeWatching />,
   },
 ];

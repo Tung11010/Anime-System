@@ -1,126 +1,18 @@
-import { HorizonCard } from "@/component/Card";
-import { SectionHeading } from "@/component/Section";
+import { HorizonCard } from "@/components/Card";
+import { SectionHeading } from "@/components/Section";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTopViews } from "../QueryHooks";
 
 // Define exact keys for filter
+
 type FilterOption = "Day" | "Week" | "Month" | "Years";
 
-type Movie = {
-  id: number;
-  link: string;
-  episode: number;
-  views: number;
-  title: string;
-  thumbnail: string;
-};
-
-const mockTopViewData: Record<FilterOption, Movie[]> = {
-  Day: [
-    {
-      id: 1,
-      link: "#",
-      episode: 11,
-      views: 9149,
-      title: "Boruto: Naruto Next Generations",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/trending/trend-1.jpg",
-    },
-    {
-      id: 2,
-      link: "#",
-      episode: 9,
-      views: 7452,
-      title: "Jujutsu Kaisen",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-2.jpg",
-    },
-    {
-      id: 3,
-      link: "#",
-      episode: 24,
-      views: 18500,
-      title: "Attack on Titan",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-3.jpg",
-    },
-    {
-      id: 4,
-      link: "#",
-      episode: 220,
-      views: 50000,
-      title: "Naruto Shippuden",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-4.jpg",
-    },
-      {
-      id: 5,
-      link: "#",
-      episode: 220,
-      views: 50000,
-      title: "Naruto Shippuden",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-5.jpg",
-    },
-    
-  ],
-  Week: [
-    {
-      id: 1,
-      link: "#",
-      episode: 24,
-      views: 18500,
-      title: "Attack on Titan",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-3.jpg",
-    },
-    {
-      id: 2,
-      link: "#",
-      episode: 12,
-      views: 21000,
-      title: "Demon Slayer",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-4.jpg",
-    },
-  ],
-  Month: [
-    {
-      id: 1,
-      link: "#",
-      episode: 12,
-      views: 21000,
-      title: "Demon Slayer",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-4.jpg",
-    },
-     {
-      id: 2,
-      link: "#",
-      episode: 11,
-      views: 9149,
-      title: "Boruto: Naruto Next Generations",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/trending/trend-1.jpg",
-    },
-    {
-      id: 3,
-      link: "#",
-      episode: 9,
-      views: 7452,
-      title: "Jujutsu Kaisen",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-2.jpg",
-    },
-  ],
-  Years: [
-    {
-      id: 1,
-      link: "#",
-      episode: 220,
-      views: 50000,
-      title: "Naruto Shippuden",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/trending/trend-3.jpg",
-    },
-    {
-      id: 2,
-      link: "#",
-      episode: 220,
-      views: 50000,
-      title: "Naruto Shippuden",
-      thumbnail: "https://preview.colorlib.com/theme/anime/img/sidebar/tv-3.jpg",
-    },
-  ],
+const periodMap: Record<FilterOption, 'day' | 'week' | 'month' | 'year'> = {
+  Day: 'day',
+  Week: 'week',
+  Month: 'month',
+  Years: 'year',
 };
 
 
@@ -128,7 +20,8 @@ const mockTopViewData: Record<FilterOption, Movie[]> = {
 
 const TopViewSection = () => {
   const [activeFilter, setActiveFilter] = useState<FilterOption>("Day");
-  const data = mockTopViewData[activeFilter];
+
+  const { data: movies = []} = useTopViews(periodMap[activeFilter]);
 
   return (
     <section className="mb-6">
@@ -143,20 +36,20 @@ const TopViewSection = () => {
       <AnimatePresence mode="wait">
         <motion.div
           key={activeFilter}
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.4 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
           className="flex flex-col gap-3 mb-6"
         >
-          {data.map((movie) => (
+          {movies.map((movie) => (
             <HorizonCard
               key={movie.id}
-              link={movie.link}
-              episode={movie.episode}
-              views={movie.views}
+              slug={movie.slug}
+              episode={Number(movie.episodesCount ?? 0)}
+              views={movie.viewsCount}
               title={movie.title}
-              thumbnail={movie.thumbnail}
+              thumbnail={movie.img_url}
             />
           ))}
         </motion.div>
