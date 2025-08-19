@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const API_BASE_URL = "http://localhost:3000";
 
@@ -13,29 +13,42 @@ export interface LoginData {
   password: string;
 }
 
-export const registerUser = async (data: RegisterData) => {
+export interface AuthResponse {
+  user: {
+    id: string;
+    email: string;
+    username: string;
+    role: string;
+  };
+  accessToken: string;
+  refreshToken: string;
+}
+
+export const registerUser = async (data: RegisterData): Promise<AuthResponse> => {
   try {
-    const res = await axios.post(`${API_BASE_URL}/auth/register`, data, {
+    const res = await axios.post<AuthResponse>(`${API_BASE_URL}/auth/register`, data, {
       headers: { "Content-Type": "application/json" },
     });
     return res.data;
-  } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message || "Registration failed");
+  } catch (error) {
+    const err = error as AxiosError<{ message?: string }>;
+    if (err.response) {
+      throw new Error(err.response.data?.message || "Registration failed");
     }
     throw new Error("Network error");
   }
 };
 
-export const loginUser = async (data: LoginData) => {
+export const loginUser = async (data: LoginData): Promise<AuthResponse> => {
   try {
-    const res = await axios.post(`${API_BASE_URL}/auth/login`, data, {
+    const res = await axios.post<AuthResponse>(`${API_BASE_URL}/auth/login`, data, {
       headers: { "Content-Type": "application/json" },
     });
     return res.data;
-  } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message || "Login failed");
+  } catch (error) {
+    const err = error as AxiosError<{ message?: string }>;
+    if (err.response) {
+      throw new Error(err.response.data?.message || "Login failed");
     }
     throw new Error("Network error");
   }

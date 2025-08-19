@@ -4,6 +4,7 @@ import Layouts from "@/modules/Layouts";
 import { createHashRouter } from "react-router-dom";
 import { routesAdmin } from "./routes";
 
+
 export const routers = createHashRouter([
   {
     path: pathRoutes.dashboard,
@@ -26,5 +27,13 @@ export const routers = createHashRouter([
       return { element: <SignUpPage /> };
     },
     errorElement: <FiveHundred />,
+  },
+  {
+    path: "/admin",
+    lazy: async () => {
+      const { Admin } = await import("@/modules/Admin/admin");
+      return { element: <Admin /> };
+    },
   }
+  
 ]);

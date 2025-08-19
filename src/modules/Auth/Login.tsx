@@ -9,28 +9,45 @@ import TwitterButton from "../../component/Buttons/TwitterButton";
 import { Link } from "react-router-dom";
 import { loginUser } from "./services/authService";
 import { toast } from "react-toastify";
+import { LoginRequest, AuthResponse } from "./types/auth.types";
+
+// 🔑 Token Utils
+const TOKEN_KEYS = {
+  ACCESS: "accessToken",
+  REFRESH: "refreshToken",
+};
+
+const saveTokens = (accessToken: string, refreshToken: string, id: string) => {
+  localStorage.setItem(TOKEN_KEYS.ACCESS, accessToken);
+  localStorage.setItem(TOKEN_KEYS.REFRESH, refreshToken);
+   localStorage.setItem("userId", id);
+};
 
 export const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<LoginRequest["email"]>("");
+  const [password, setPassword] = useState<LoginRequest["password"]>("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
     try {
-      const res = await loginUser({ email, password });
+      const payload: LoginRequest = { email, password };
+      const res: AuthResponse = await loginUser(payload);
+
+
+      saveTokens(res.accessToken, res.refreshToken , res.user.id);
+
       toast.success("Login successful!");
       console.log("Login success:", res);
-      
-    } catch (err: any) {
-      toast.error(`${err.message}`);
-      
+    } catch (err: unknown) {
+      toast.error("Unexpected error");
     } finally {
       setLoading(false);
     }
+    
   };
 
   return (
@@ -38,13 +55,12 @@ export const LoginPage: React.FC = () => {
       <BreadCrumb title="Login" />
       <div className="flex flex-col items-center justify-center w-full px-2 py-10">
         <div className="bg-transparent w-full max-w-4xl flex flex-col md:flex-row md:space-x-8 md:bg-[#0B0C2A] md:rounded-lg md:shadow-none">
-          
           {/* Login Form */}
           <div className="flex-1 flex flex-col items-center md:items-start md:pr-8">
             <h2 className="text-white text-2xl font-bold mb-6 w-full">Login</h2>
             <form className="w-full max-w-sm space-y-4" onSubmit={handleLogin}>
-              <EmailInput value={email} onChange={(e: any) => setEmail(e.target.value)} />
-              <PasswordInput value={password} onChange={(e: any) => setPassword(e.target.value)} />
+              <EmailInput value={email} onChange={(e) => setEmail(e.target.value)} />
+              <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
               <div className="flex items-center justify-between mt-2">
                 <LoginButton
                   className="bg-[#F44336] hover:bg-[#d32f2f] text-white font-bold px-6 py-2 rounded min-w-[140px]"

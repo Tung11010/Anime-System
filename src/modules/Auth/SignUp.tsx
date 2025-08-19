@@ -9,25 +9,28 @@ import GgButton from "../../component/Buttons/GgButton";
 import TwitterButton from "../../component/Buttons/TwitterButton";
 import { registerUser } from "./services/authService";
 import { toast } from "react-toastify";
+import { RegisterRequest } from "./types/auth.types";
+import { AuthResponse } from "./types/auth.types";
+
 
 export const SignUpPage: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [username, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<RegisterRequest["email"]>("");
+  const [username, setName] = useState<RegisterRequest["username"]>("");
+  const [password, setPassword] = useState<RegisterRequest["password"]>("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
     try {
-      const res = await registerUser({ email, username, password });
-      toast.success(" Register success!");
+      const payload: RegisterRequest = { email, username, password };
+      const res: AuthResponse = await registerUser(payload);
+      toast.success("Register success!");
       console.log("Register success:", res);
-    } catch (err: any) {
-      toast.error(`❌ ${err.message}`);
-      
+    } catch {
+      toast.error("Unexpected error");
     } finally {
       setLoading(false);
     }
@@ -43,9 +46,9 @@ export const SignUpPage: React.FC = () => {
           <div className="flex-1 flex flex-col items-center md:items-start md:pr-8">
             <h2 className="text-white text-2xl font-bold mb-6 w-full">Sign Up</h2>
             <form className="w-full max-w-sm space-y-4" onSubmit={handleSubmit}>
-              <EmailInput placeholder="Email address" value={email} onChange={(e: any) => setEmail(e.target.value)} />
-              <NameInput placeholder="Your Name" value={username} onChange={(e: any) => setName(e.target.value)} />
-              <PasswordInput placeholder="Password" value={password} onChange={(e: any) => setPassword(e.target.value)} />
+              <EmailInput placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <NameInput placeholder="Your Name" value={username} onChange={(e) => setName(e.target.value)} />
+              <PasswordInput placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
               <div className="flex items-center justify-between mt-2">
                 <LoginButton
                   className="bg-[#F44336] hover:bg-[#d32f2f] text-white font-bold px-6 py-2 rounded min-w-[140px]"
