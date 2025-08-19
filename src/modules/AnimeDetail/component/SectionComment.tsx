@@ -5,6 +5,7 @@ import ButtonReview from '../../../components/Button/buttonReview';
 import { useParams } from 'react-router-dom';
 import { useMovieDetailSlug } from '../QueryHooks';
 import { useState } from 'react';
+import { Comment } from '../types';
 
 const SectionComment: React.FC = () => {
   const { slug } = useParams();
@@ -26,7 +27,7 @@ const SectionComment: React.FC = () => {
 
       {/* List comments */}
       <div className="mt-12 flex flex-col gap-6 px-7 pb-10">
-        {comments.slice(0, visibleCount).map((c: any, idx: number) => (
+        {comments.slice(0, visibleCount).map((c: Comment, idx: number) => (
           <div key={idx} className="flex items-start gap-4">
             <AvatarCircle src={c.user.avatar} size={56} />
             <CommentCard

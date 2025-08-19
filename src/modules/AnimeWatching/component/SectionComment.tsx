@@ -6,6 +6,7 @@ import InputComment from "@/components/Input/InputComment";
 import ButtonReview from "@/components/Button/buttonReview";
 import { useParams } from "react-router-dom";
 import { useMovieWatchingSlug } from "../QueryHooks";
+import { Comment } from "../types";
 
 
 const SectionComment: React.FC = () => {
@@ -33,12 +34,12 @@ const SectionComment: React.FC = () => {
 
       {/* Danh sách comment */}
       <div className="mt-12 flex flex-col gap-6 px-7 pb-10">
-        {comments.slice(0, visibleCount).map((c: any, idx: number) => (
+        {comments.slice(0, visibleCount).map((c: Comment, idx: number) => (
           <div key={idx} className="flex items-start gap-4">
             <AvatarCircle src={c.user.avatar} size={56} />
             <CommentCard
               username={c.user.username}
-              time={c.time}
+              time={c.timeAgo}
               content={c.content}
             />
           </div>
