@@ -27,13 +27,7 @@ export const routers = createHashRouter([
       return { element: <SignUpPage /> };
     },
     errorElement: <FiveHundred />,
-  },
-  {
-    path: "/admin",
-    lazy: async () => {
-      const { Admin } = await import("@/modules/Admin/admin");
-      return { element: <Admin /> };
-    },
   }
+ 
   
 ]);
