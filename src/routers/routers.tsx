@@ -6,8 +6,6 @@ import { createHashRouter } from "react-router-dom";
 import { routesAdmin, routesUser } from "./routes";
 import UserLayout from "@/modules/Layouts/components/Client/LayoutClient";
 
-
-
 export const routers = createHashRouter([
 
   {
@@ -23,13 +21,12 @@ export const routers = createHashRouter([
     children: routesAdmin,
   },
   {
-    path: "*",
+    path: "/login",
     lazy: async () => {
-      const { NotFoundPage } = await import("@/modules/Errors");
-      return { element: <NotFoundPage /> };
+      const { LoginPage } = await import("@/modules/Auth/Login");
+      return { element: <LoginPage /> };
     },
     errorElement: <FiveHundred />,
   },
 
-  
 ]);

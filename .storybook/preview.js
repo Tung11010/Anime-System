@@ -1,7 +1,11 @@
 
 import "../src/index.scss"; 
 /** @type { import('@storybook/react-vite').Preview } */
+<<<<<<< HEAD
 import '../src/index.scss'
+=======
+import '../src/index.scss';
+>>>>>>> feature/add-conponents
 const preview = {
   parameters: {
     controls: {

@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ConfigProvider, Spin } from "antd";
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import "swiper/css";
@@ -10,6 +10,8 @@ import { customStyle, direction, themeColor } from "./configs/theme.tsx";
 import "./index.scss";
 import { routers } from "@/routers";
 import { AnyElement } from "./types.ts";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,7 +42,22 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           components: themeColor.components as AnyElement,
         }}
       >
-        <RouterProvider fallbackElement={<Spin spinning={true} />} router={routers} />
+        <Suspense fallback={<Spin spinning={true} />}>
+          <RouterProvider router={routers} />
+        </Suspense>
+
+        {/* ✅ Toast container hiển thị toàn cục */}
+        <ToastContainer
+          position="top-right"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+
         <ReactQueryDevtools initialIsOpen={false} />
       </ConfigProvider>
     </QueryClientProvider>
