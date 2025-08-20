@@ -7,48 +7,51 @@ import FbButton from "../../../component/Buttons/FbButton";
 import GgButton from "../../../component/Buttons/GgButton";
 import TwitterButton from "../../../component/Buttons/TwitterButton";
 import { Link } from "react-router-dom";
-import { loginUser } from "../services/authService";
+
+
+import { useDispatch } from "react-redux";
+import { loginUser } from "./services/authService";
 import { toast } from "react-toastify";
-import { LoginRequest, AuthResponse } from "../types/auth.types";
+import { LoginRequest, AuthResponse } from "./types/auth.types";
+import { loginSuccess } from "./store/authSlice";
 
-// 🔑 Token Utils
-const TOKEN_KEYS = {
-  ACCESS: "accessToken",
-  REFRESH: "refreshToken",
-};
 
-const saveTokens = (accessToken: string, refreshToken: string, id: string) => {
-  localStorage.setItem(TOKEN_KEYS.ACCESS, accessToken);
-  localStorage.setItem(TOKEN_KEYS.REFRESH, refreshToken);
-   localStorage.setItem("userId", id);
-};
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<LoginRequest["email"]>("");
   const [password, setPassword] = useState<LoginRequest["password"]>("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const dispatch = useDispatch();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setMessage("");
     try {
       const payload: LoginRequest = { email, password };
       const res: AuthResponse = await loginUser(payload);
 
-
-      saveTokens(res.accessToken, res.refreshToken , res.user.id);
+      // Lưu vào Redux (persist sẽ tự lưu xuống localStorage)
+      dispatch(
+        loginSuccess({
+          user: {
+            id: res.user.id,
+            email: res.user.email,
+            username: res.user.username,
+            role: res.user.role, // Ensure 'role' is included
+          },
+          accessToken: res.accessToken,
+          refreshToken: res.refreshToken,
+        }),
+      );
 
       toast.success("Login successful!");
-      console.log("Login success:", res);
     } catch (err: unknown) {
       toast.error("Unexpected error");
     } finally {
       setLoading(false);
     }
-    
   };
+
 
   return (
     <div className="min-h-screen bg-[#0B0C2A] w-full">
@@ -69,7 +72,8 @@ export const LoginPage: React.FC = () => {
                 <a href="#" className="text-xs text-white ml-2 hover:underline">Forgot Your Password?</a>
               </div>
             </form>
-            {message && <p className="text-white mt-3">{message}</p>}
+            {/* Uncomment the following line if you define 'message' */}
+            {/* {message && <p className="text-white mt-3">{message}</p>} */}
           </div>
 
           {/* Divider */}

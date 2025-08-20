@@ -4,6 +4,7 @@ interface LoginButtonProps {
   onClick?: () => void;
   className?: string;
   text?: string;
+  disabled?: boolean;
 }
 
 const LoginButton: React.FC<LoginButtonProps> = ({ onClick, className = "", text = "LOGIN NOW" }) => (

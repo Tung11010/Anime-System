@@ -13,6 +13,12 @@ import { AnyElement } from "./types.ts";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// 👇 thêm Redux + Persist
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store } from "./modules/Auth/store/store.ts";
+import { persistor } from "./modules/Auth/store/store.ts";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -30,36 +36,40 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ConfigProvider
-        direction={direction}
-        form={{
-          colon: false,
-          scrollToFirstError: true,
-        }}
-        theme={{
-          ...customStyle,
-          components: themeColor.components as AnyElement,
-        }}
-      >
-        <Suspense fallback={<Spin spinning={true} />}>
-          <RouterProvider router={routers} />
-        </Suspense>
+    <Provider store={store}>
+      <PersistGate loading={<Spin spinning />} persistor={persistor}>
+        <QueryClientProvider client={queryClient}>
+          <ConfigProvider
+            direction={direction}
+            form={{
+              colon: false,
+              scrollToFirstError: true,
+            }}
+            theme={{
+              ...customStyle,
+              components: themeColor.components as AnyElement,
+            }}
+          >
+            <Suspense fallback={<Spin spinning={true} />}>
+              <RouterProvider router={routers} />
+            </Suspense>
 
-        {/* ✅ Toast container hiển thị toàn cục */}
-        <ToastContainer
-          position="top-right"
-          autoClose={4000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+            {/* ✅ Toast container hiển thị toàn cục */}
+            <ToastContainer
+              position="top-right"
+              autoClose={4000}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              draggable
+              pauseOnHover
+              theme="light"
+            />
 
-        <ReactQueryDevtools initialIsOpen={false} />
-      </ConfigProvider>
-    </QueryClientProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </ConfigProvider>
+        </QueryClientProvider>
+      </PersistGate>
+    </Provider>
   </StrictMode>
 );
