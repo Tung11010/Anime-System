@@ -10,10 +10,10 @@ import { Link } from "react-router-dom";
 
 
 import { useDispatch } from "react-redux";
-import { loginUser } from "./services/authService";
+import { loginUser } from "../services/authService";
 import { toast } from "react-toastify";
-import { LoginRequest, AuthResponse } from "./types/auth.types";
-import { loginSuccess } from "./store/authSlice";
+import { LoginRequest, AuthResponse } from "../types/auth.types";
+import { loginSuccess } from "../store/authSlice";
 
 
 

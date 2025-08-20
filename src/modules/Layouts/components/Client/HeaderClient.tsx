@@ -1,4 +1,4 @@
-import { ChevronDown, LogIn, Search, User } from 'lucide-react';
+import { ChevronDown, LogIn, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface HeaderLayoutProps {
