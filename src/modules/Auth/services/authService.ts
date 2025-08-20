@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 
 const API_BASE_URL = "http://localhost:3000";
 
+// ====== TYPES ======
 export interface RegisterData {
   email: string;
   username: string;
@@ -13,6 +14,7 @@ export interface LoginData {
   password: string;
 }
 
+// Login response (có token + user)
 export interface AuthResponse {
   user: {
     id: string;
@@ -22,13 +24,28 @@ export interface AuthResponse {
   };
   accessToken: string;
   refreshToken: string;
+  success: boolean;
+  message: string;
 }
 
-export const registerUser = async (data: RegisterData): Promise<AuthResponse> => {
+// Register response (chỉ success + message)
+export interface RegisterResponse {
+  success: boolean;
+  message: string;
+}
+
+// ====== SERVICES ======
+export const registerUser = async (
+  data: RegisterData
+): Promise<RegisterResponse> => {
   try {
-    const res = await axios.post<AuthResponse>(`${API_BASE_URL}/auth/register`, data, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const res = await axios.post<RegisterResponse>(
+      `${API_BASE_URL}/auth/register`,
+      data,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     return res.data;
   } catch (error) {
     const err = error as AxiosError<{ message?: string }>;
@@ -41,9 +58,13 @@ export const registerUser = async (data: RegisterData): Promise<AuthResponse> =>
 
 export const loginUser = async (data: LoginData): Promise<AuthResponse> => {
   try {
-    const res = await axios.post<AuthResponse>(`${API_BASE_URL}/auth/login`, data, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const res = await axios.post<AuthResponse>(
+      `${API_BASE_URL}/auth/login`,
+      data,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     return res.data;
   } catch (error) {
     const err = error as AxiosError<{ message?: string }>;

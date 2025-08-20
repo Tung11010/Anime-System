@@ -8,8 +8,6 @@ import { Episode } from "../types";
 const SectionEpisode: React.FC = () => {
   const { slug } = useParams();
   const { data } = useMovieWatchingSlug(slug || "");
-
-
   const [selectedEpisode, setSelectedEpisode] = useState<number | null>(null); 
   const episodes = useMemo(() => data?.episodes ?? [], [data?.episodes]);
   // Khi dữ liệu về, mặc định chọn tập 1

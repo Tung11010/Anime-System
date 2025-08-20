@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import BreadCrumb from "../../component/Banner/BreadCrumb";
-import EmailInput from "../../component/input/email";
-import PasswordInput from "../../component/input/password";
-import LoginButton from "../../component/Buttons/LoginButton";
-import FbButton from "../../component/Buttons/FbButton";
-import GgButton from "../../component/Buttons/GgButton";
-import TwitterButton from "../../component/Buttons/TwitterButton";
+import BreadCrumb from "../../../component/Banner/BreadCrumb";
+import EmailInput from "../../../component/input/email";
+import PasswordInput from "../../../component/input/password";
+import LoginButton from "../../../component/Buttons/LoginButton";
+import FbButton from "../../../component/Buttons/FbButton";
+import GgButton from "../../../component/Buttons/GgButton";
+import TwitterButton from "../../../component/Buttons/TwitterButton";
 import { Link } from "react-router-dom";
-import { loginUser } from "./services/authService";
+import { loginUser } from "../services/authService";
 import { toast } from "react-toastify";
-import { LoginRequest, AuthResponse } from "./types/auth.types";
+import { LoginRequest, AuthResponse } from "../types/auth.types";
 
 // 🔑 Token Utils
 const TOKEN_KEYS = {
@@ -87,7 +87,7 @@ export const LoginPage: React.FC = () => {
         </div>
 
         {/* Social Login */}
-        <div className="w-full max-w-sm mt-10">
+        <div className="w-full max-w-md mt-10">
           <div className="flex items-center mb-4">
             <div className="flex-1 h-px bg-gray-600" />
             <span className="text-gray-400 px-2 text-sm">OR</span>

@@ -23,7 +23,7 @@ export const routers = createHashRouter([
   {
     path: "/login",
     lazy: async () => {
-      const { LoginPage } = await import("@/modules/Auth/Login");
+      const { LoginPage } = await import("@/modules/Auth/pages/Login");
       return { element: <LoginPage /> };
     },
     errorElement: <FiveHundred />,

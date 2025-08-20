@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import BreadCrumb from "../../component/Banner/BreadCrumb";
-import EmailInput from "../../component/input/email";
-import PasswordInput from "../../component/input/password";
-import NameInput from "../../component/input/name"; 
-import LoginButton from "../../component/Buttons/LoginButton";
-import FbButton from "../../component/Buttons/FbButton";
-import GgButton from "../../component/Buttons/GgButton";
-import TwitterButton from "../../component/Buttons/TwitterButton";
-import { registerUser } from "./services/authService";
+import BreadCrumb from "../../../component/Banner/BreadCrumb";
+import EmailInput from "../../../component/input/email";
+import PasswordInput from "../../../component/input/password";
+import NameInput from "../../../component/input/name"; 
+import LoginButton from "../../../component/Buttons/LoginButton";
+import FbButton from "../../../component/Buttons/FbButton";
+import GgButton from "../../../component/Buttons/GgButton";
+import TwitterButton from "../../../component/Buttons/TwitterButton";
+import { registerUser } from "../services/authService";
 import { toast } from "react-toastify";
-import { RegisterRequest } from "./types/auth.types";
-import { AuthResponse } from "./types/auth.types";
+import { RegisterRequest, RegisterResponse } from "../types/auth.types";
+import { Link } from "react-router-dom";
 
 
 export const SignUpPage: React.FC = () => {
@@ -25,12 +25,21 @@ export const SignUpPage: React.FC = () => {
     setLoading(true);
     setMessage("");
     try {
-      const payload: RegisterRequest = { email, username, password };
-      const res: AuthResponse = await registerUser(payload);
-      toast.success("Register success!");
+    const payload: RegisterRequest = { email, username, password };
+    const res: RegisterResponse = await registerUser(payload);
+
+    if (res.success) {
+      toast.success(res.message);
       console.log("Register success:", res);
-    } catch {
-      toast.error("Unexpected error");
+      // Ví dụ: chuyển sang trang login
+      // navigate("/login")
+    } else {
+      toast.error(res.message);
+      setMessage(res.message);
+    }
+    } catch (error) {
+      toast.error("Something went wrong, please try again.");
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -56,10 +65,10 @@ export const SignUpPage: React.FC = () => {
                 />
               </div>
             </form>
-            {message && <p className="text-white mt-3">{message}</p>}
+            {message && <p className="text-red-600 mt-3">{message}</p>}
             <div className="mt-4 text-center w-full">
               <span className="text-white text-sm">Already have an account? </span>
-              <a href="#" className="text-[#F44336] text-sm hover:underline">Log In!</a>
+              <Link to="/login" className="text-[#F44336] text-sm hover:underline">Log In!</Link>
             </div>
           </div>
 
@@ -70,7 +79,7 @@ export const SignUpPage: React.FC = () => {
           <div className="flex-1 flex flex-col items-center md:items-start md:pl-8 mt-8 md:mt-0">
             <h2 className="text-white text-2xl font-bold mb-6 w-full">Login With:</h2>
             <div className="space-y-3 w-full">
-              <FbButton className="w-full" text="SIGN IN WITH FACEBOOK" />
+              <FbButton className="w-full whitespace-nowrap" text="SIGN IN WITH FACEBOOK" />
               <GgButton className="w-full" text="SIGN IN WITH GOOGLE" />
               <TwitterButton className="w-full" text="SIGN IN WITH TWITTER" />
             </div>

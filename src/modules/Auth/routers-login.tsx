@@ -1,8 +1,8 @@
 import { RouteObject } from "react-router-dom";
-import LoginPage from "./Login";
+import LoginPage from "./pages/Login";
 export const LoginRoutes: RouteObject[] = [
   {
-    index: true,
+    path: "/login",
     element: <LoginPage />,
   },
 ];

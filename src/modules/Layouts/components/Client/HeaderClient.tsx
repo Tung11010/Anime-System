@@ -1,4 +1,4 @@
-import { ChevronDown, Search, User } from 'lucide-react';
+import { ChevronDown, LogIn, Search, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface HeaderLayoutProps {
@@ -45,9 +45,10 @@ const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
         {/* Icons */}
         <div className="flex flex-1 gap-4 text-white justify-center md:justify-center w-full md:w-auto px-4 md:px-0">
           <Search onClick={onSearchClick} size={18} className="cursor-pointer hover:opacity-80" />
-          <a href="/signup">
-            <User size={18} />
-          </a>
+          <Link to="/login">
+            {/* <User size={18} /> */}
+             <LogIn className='cursor-pointer hover:opacity-80' size={18} />
+          </Link>
         </div>
       </div>
     </header>

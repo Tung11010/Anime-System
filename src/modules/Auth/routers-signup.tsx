@@ -1,8 +1,8 @@
 import { RouteObject } from "react-router-dom";
-import SignUpPage from "./SignUp";
+import SignUpPage from "./pages/SignUp";
 export const SignUpRoutes: RouteObject[] = [
   {
-    index: true,
+    path: "/signup",
     element: <SignUpPage />,
   },
 ];

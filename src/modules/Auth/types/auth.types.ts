@@ -1,3 +1,19 @@
+export interface RegisterRequest {
+  email: string;
+  username: string;
+  password: string;
+}
+
+export interface RegisterResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
 export interface AuthResponse {
   user: {
     id: string;
@@ -7,15 +23,6 @@ export interface AuthResponse {
   };
   accessToken: string;
   refreshToken: string;
-}
-
-export interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-export interface RegisterRequest {
-  email: string;
-  username: string;
-  password: string;
+  success: boolean;
+  message: string;
 }
