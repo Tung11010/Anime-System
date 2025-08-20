@@ -18,7 +18,7 @@ export interface AuthResponse {
     id: string;
     email: string;
     username: string;
-    role: string;
+    role: string; 
   };
   accessToken: string;
   refreshToken: string;
