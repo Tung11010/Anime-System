@@ -8,11 +8,13 @@ import { AnimeDetailRoutes } from "@/modules/AnimeDetail/routes";
 import { AnimeWatchingRoutes } from "@/modules/AnimeWatching/routes";
 import { LoginRoutes } from "@/modules/Auth/routers-login";
 import { SignUpRoutes } from "@/modules/Auth/routers-signup";
+import { ProfileUserRoutes } from "@/modules/ProfileUser/routers";
+
 
 export const routesAdmin: RouteObject[] = [...dashboardRoutes];
 
 export const routesUser: RouteObject[] = [...homepageRoutes, ...categoryRoutes, ...AnimeDetailRoutes,
-...AnimeWatchingRoutes, ...LoginRoutes, ...SignUpRoutes];
+...AnimeWatchingRoutes, ...LoginRoutes, ...SignUpRoutes, ...ProfileUserRoutes];
 
 
 

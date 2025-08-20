@@ -1,11 +1,16 @@
-import { ChevronDown, LogIn, Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ChevronDown, LogIn, Search, User } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'; // Removed useDispatch since handleLogout is unused
+import { RootState } from '@/modules/Auth/store/store';
 
 interface HeaderLayoutProps {
   onSearchClick: () => void;
 }
 
 const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const navigate = useNavigate();
+
   return (
     <header className="bg-[#070720] h-17">
       <div className="w-[90%] max-w-[1200px] font-semibold h-full mx-auto flex flex-col md:flex-row items-center justify-between ">
@@ -45,10 +50,18 @@ const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
         {/* Icons */}
         <div className="flex flex-1 gap-4 text-white justify-center md:justify-center w-full md:w-auto px-4 md:px-0">
           <Search onClick={onSearchClick} size={18} className="cursor-pointer hover:opacity-80" />
-          <Link to="/login">
-            {/* <User size={18} /> */}
-             <LogIn className='cursor-pointer hover:opacity-80' size={18} />
-          </Link>
+          {isAuthenticated ? (
+            <User 
+              size={18}
+              className="cursor-pointer hover:opacity-80"
+              onClick={() => navigate('/profile')}
+              aria-label="Logout"
+            />
+          ) : (
+            <Link to="/login">
+              <LogIn className="cursor-pointer hover:opacity-80" size={18} />
+            </Link>
+          )}
         </div>
       </div>
     </header>
