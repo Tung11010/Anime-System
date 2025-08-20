@@ -46,11 +46,11 @@ export const LoginPage: React.FC = () => {
 
       toast.success("Login successful!");
       navigate("/"); // Redirect to homepage after login
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.message || "Login failed. Please try again.";
+    } catch (err: unknown) {
+      const errorMessage =
+        (err as { response?: { data?: { message?: string } } }).response?.data?.message ||
+        "Login failed. Please try again.";
       toast.error(errorMessage);
-    } finally {
-      setLoading(false);
     }
   };
 
