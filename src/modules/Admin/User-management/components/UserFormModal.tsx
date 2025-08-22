@@ -1,9 +1,9 @@
 import { useUserStore } from '../store/userStore';
 import { ROLES } from '../constants';
-import { Modal } from './ui/Modal';
-import { Input } from './ui/Input';
-import { Select } from './ui/Select';
-import { Button } from './ui/Button';
+import { Modal } from '../../../../components/Modal/ModalAdmin';
+import { Input } from '@/components/Input/InputAdmin';
+import { Select } from '../../../../components/Select/SelectAdmin';
+import { Button } from '@/components/Button/ButtonAdmin';
 
 export const UserFormModal: React.FC<{ onSave: () => void }> = ({ onSave }) => {
   const { showForm, editingUser, formData, setShowForm, setFormData } = useUserStore();

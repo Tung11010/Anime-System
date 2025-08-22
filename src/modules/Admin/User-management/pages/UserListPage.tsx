@@ -2,18 +2,23 @@ import { useUsers, useDeleteUser, useCreateUser, useUpdateUser } from '../queryH
 import { useUserStore } from '../store/userStore';
 import { UserTable } from '../components/UserTable';
 import { UserFormModal } from '../components/UserFormModal';
-import { ROLES, USERS_PER_PAGE_OPTIONS } from '../constants';
+import {  USERS_PER_PAGE_OPTIONS } from '../constants';
 import { containerStyles, mainContentStyles } from './styled';
-import { Sidebar } from '../components/ui/Sidebar';
-import { Button } from '../components/ui/Button';
-import { Input } from '../components/ui/Input';
-import { Select } from '../components/ui/Select';
-import { Pagination } from '../components/ui/Pagination';
+import { Sidebar } from '@/components/Sidebar/SidebarAdmin';
+import { Button } from '@/components/Button/ButtonAdmin';
+import { Input } from '@/components/Input/InputAdmin';
+import { Select } from '../../../../components/Select/SelectAdmin';
+import { Pagination } from '../../../../components/Pagination/Pagination';
+import { User } from '../types';
+import { useState } from 'react';
+
+
 export default function UserListPage() {
   const { data: users = [], isLoading, error } = useUsers();
   const deleteUser = useDeleteUser();
   const createUser = useCreateUser();
   const updateUser = useUpdateUser();
+  const [collapsed] = useState(false);
   const {
     searchTerm,
     currentPage,
@@ -28,13 +33,13 @@ export default function UserListPage() {
     setFormData,
   } = useUserStore();
 
-  const handleEdit = (user: any) => {
+  const handleEdit = (user: User) => {
     setEditingUser(user);
     setFormData({
       username: user.username,
       email: user.email,
       password: '',
-      role: user.role,
+      role: user.role, 
     });
     setShowForm(true);
   };
@@ -55,7 +60,7 @@ export default function UserListPage() {
           onSuccess: () => {
             setShowForm(false);
             setEditingUser(null);
-            setFormData({ username: '', email: '', password: '', role: ROLES.USER });
+            setFormData({ username: '', email: '', password: '', role: '' }); 
           },
         }
       );
@@ -64,7 +69,7 @@ export default function UserListPage() {
         onError: () => alert('Thêm thất bại'),
         onSuccess: () => {
           setShowForm(false);
-          setFormData({ username: '', email: '', password: '', role: ROLES.USER });
+          setFormData({ username: '', email: '', password: '', role: '' });
         },
       });
     }
@@ -73,7 +78,7 @@ export default function UserListPage() {
   if (isLoading) return <div>Đang tải...</div>;
   if (error) return <div className="text-red-500">{error.message}</div>;
 
-  const filteredUsers = users.filter((u) =>
+  const filteredUsers = users.filter((u: User) =>
     u.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
   const indexOfLastUser = currentPage * usersPerPage;
@@ -81,8 +86,9 @@ export default function UserListPage() {
   const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
 
-  const normalUsers = currentUsers.filter((u) => u.role === ROLES.USER);
-  const adminUsers = currentUsers.filter((u) => u.role === ROLES.ADMIN);
+  
+  const normalUsers = currentUsers.filter((u: User) => u.role.toLowerCase() === 'user');
+  const adminUsers = currentUsers.filter((u: User) => u.role.toLowerCase() === 'admin');
 
   return (
     <div className={containerStyles}>
@@ -92,27 +98,29 @@ export default function UserListPage() {
           window.location.href = '/';
         }}
       />
-      <div className={mainContentStyles}>
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold mb-2">Danh sách người dùng</h2>
-          <Button
-            variant="primary"
-            onClick={() => {
-              setShowForm(true);
-              setEditingUser(null);
-              setFormData({ username: '', email: '', password: '', role: ROLES.USER });
-            }}
-          >
-            + Thêm user
-          </Button>
+      <div className={`${mainContentStyles} ${collapsed ? 'ml-20' : 'ml-64'}`}>
+        <div className="mb-8">
+          <div className="text-3xl font-bold mb-4">Danh sách người dùng</div>
+          <div>
+            <Button
+              variant="primary"
+              onClick={() => {
+                setShowForm(true);
+                setEditingUser(null);
+                setFormData({ username: '', email: '', password: '', role: '' });
+              }}
+            >
+              + Thêm user
+            </Button>
+          </div>
         </div>
         <div className="mb-6 flex items-center gap-4">
           <Input
             type="text"
             placeholder="Tìm theo username..."
-            className="w-80"
+            className="w-64"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
           />
           <Select
             options={USERS_PER_PAGE_OPTIONS.map((option) => ({
@@ -120,7 +128,7 @@ export default function UserListPage() {
               label: `${option} / trang`,
             }))}
             value={usersPerPage}
-            onChange={(e) => setUsersPerPage(Number(e.target.value))}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setUsersPerPage(Number(e.target.value))}
           />
         </div>
         <UserTable

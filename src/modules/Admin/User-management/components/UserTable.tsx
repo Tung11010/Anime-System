@@ -1,7 +1,7 @@
 import { User } from '../types';
-import { Table } from './ui/Table';
-import { TableRow } from './ui/TableRow';
-import { Button } from './ui/Button';
+import { Table } from '../../../../components/Table/TableAdmin';
+import { TableRow } from '../../../../components/Table/TableRowAdmin';
+import { Button } from '../../../../components/Button/ButtonAdmin';
 
 interface UserTableProps {
   users: User[];

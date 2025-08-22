@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import AdminMovies from "./AdminMovies";
+import AdminMovies from "./pages/AdminMovies";
 
 
 export const AdminMoviesRoutes: RouteObject[] = [

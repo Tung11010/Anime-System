@@ -10,7 +10,7 @@ import { SignUpRoutes } from "@/modules/Auth/routers-signup";
 import { ProfileUserRoutes } from "@/modules/ProfileUser/routers";
 import { AdminRoutes } from "@/modules/Admin/router";
 import { UserListRoutes } from "@/modules/Admin/User-management/routers";
-import { AdminMoviesRoutes } from "@/modules/Admin/routers";
+import { AdminMoviesRoutes } from "@/modules/Admin/Movie-management/routers";
 
 export const routesAdmin = [...dashboardRoutes];
 export const routesDashboard = [...AdminRoutes, ...UserListRoutes, ...AdminMoviesRoutes];

@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from './Button';
+import { Button } from '@/components/Button/ButtonAdmin';
 
 interface SidebarProps {
   onLogout: () => void;
+  onToggle?: () => void; 
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ onLogout, onToggle }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleSidebar = () => {
     setCollapsed((c) => !c);
+    if (onToggle) onToggle(); 
   };
 
   return (
@@ -53,26 +55,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
           <Link
             to="/admin"
             className={`flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-800 ${
-              collapsed ? 'justify-center' : ''
+              collapsed ? 'justify-center' : 'bg-gray-800 font-semibold'
             }`}
           >
-            {collapsed ? (
-              <span className="text-lg">🏠</span>
-            ) : (
-              'Dashboard'
-            )}
+            {collapsed ? <span className="text-lg">🏠</span> : 'Dashboard'}
           </Link>
           <Link
             to="/admin/users"
             className={`flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-800 ${
-              collapsed ? 'justify-center' : 'bg-gray-800 font-semibold'
+              collapsed ? 'justify-center' : ''
             }`}
           >
-            {collapsed ? (
-              <span className="text-lg">👤</span>
-            ) : (
-              'Users'
-            )}
+            {collapsed ? <span className="text-lg">🎬</span> : 'Users'}
           </Link>
           <Link
             to="/admin/movies"
@@ -80,35 +74,23 @@ export const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
               collapsed ? 'justify-center' : ''
             }`}
           >
-            {collapsed ? (
-              <span className="text-lg">🎬</span>
-            ) : (
-              'Movies'
-            )}
+            {collapsed ? <span className="text-lg">👤</span> : 'Movies'}
           </Link>
           <Link
-            to="/admin/blog"
+            to="/admin/episodes"
             className={`flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-800 ${
               collapsed ? 'justify-center' : ''
             }`}
           >
-            {collapsed ? (
-              <span className="text-lg">📝</span>
-            ) : (
-              'Episodes'
-            )}
+            {collapsed ? <span className="text-lg">📝</span> : 'Episodes'}
           </Link>
           <Link
-            to="/admin/blog"
+            to="/admin/blogs"
             className={`flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-800 ${
               collapsed ? 'justify-center' : ''
             }`}
           >
-            {collapsed ? (
-              <span className="text-lg">📝</span>
-            ) : (
-              'Blogs'
-            )}
+            {collapsed ? <span className="text-lg">📝</span> : 'Blogs'}
           </Link>
         </nav>
       </div>
