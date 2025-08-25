@@ -39,16 +39,18 @@ export const MovieFormModal: React.FC<MovieFormModalProps> = ({
       onClose={onClose}
       title={selectedMovie ? 'Sửa phim' : 'Thêm phim'}
     >
-      {error && <div className="text-red-500 mb-2">{error}</div>}
-      <div className="space-y-2">
-        <div className="grid grid-cols-2 gap-2">
+      <div className="space-y-6 max-w-3xl mx-auto">
+        {error && <div className="text-red-500">{error}</div>}
+
+        {/* Tiêu đề */}
+        <div className="grid grid-cols-2 gap-4">
           <Input
             type="text"
             name="title"
             placeholder="Tiêu đề"
             value={formData.title}
             onChange={onInputChange}
-            className="dark:bg-gray-700 dark:text-white"
+            className="w-full max-w-md"
           />
           <Input
             type="text"
@@ -56,50 +58,55 @@ export const MovieFormModal: React.FC<MovieFormModalProps> = ({
             placeholder="Tiêu đề gốc"
             value={formData.original_title}
             onChange={onInputChange}
-            className="dark:bg-gray-700 dark:text-white"
+            className="w-full max-w-md"
           />
         </div>
+
+        {/* Mô tả */}
         <textarea
           name="description"
           placeholder="Mô tả"
           value={formData.description}
           onChange={onInputChange}
-          className="w-full p-2 border rounded h-24 dark:bg-gray-700 dark:text-white"
+          className="w-full p-2 border rounded h-28 resize-none dark:bg-gray-700 dark:text-white"
         />
-        <div className="grid grid-cols-2 gap-2">
+
+        {/* Ngày phát hành + Loại */}
+        <div className="grid grid-cols-2 gap-4">
           <Input
             type="date"
             name="release_date"
-            placeholder="Ngày phát hành"
             value={
               formData.release_date instanceof Date
                 ? formData.release_date.toISOString().split('T')[0]
                 : formData.release_date
             }
             onChange={onDateChange}
-            className="dark:bg-gray-700 dark:text-white"
+            className="w-full max-w-md"
           />
           <Select
             name="type"
             value={formData.type}
             onChange={onInputChange}
-            className="dark:bg-gray-700 dark:text-white"
             options={[
               { value: '', label: 'Chọn loại' },
               ...movieTypes.map((t) => ({ value: t, label: t })),
             ]}
+            className="w-full max-w-md"
           />
         </div>
-        <div className="grid grid-cols-2 gap-2">
+
+        {/* Trạng thái + Studio */}
+        <div className="grid grid-cols-2 gap-4">
           <Select
             name="status"
             value={formData.status}
             onChange={onInputChange}
-            className="dark:bg-gray-700 dark:text-white"
             options={[
               { value: '', label: 'Chọn trạng thái' },
               ...statuses.map((s) => ({ value: s, label: s })),
             ]}
+            className="w-full max-w-md"
           />
           <Input
             type="text"
@@ -107,20 +114,22 @@ export const MovieFormModal: React.FC<MovieFormModalProps> = ({
             placeholder="Studio"
             value={formData.studio}
             onChange={onInputChange}
-            className="dark:bg-gray-700 dark:text-white"
+            className="w-full max-w-md"
           />
         </div>
-        <div className="grid grid-cols-2 gap-2">
+
+        {/* Rating + Ảnh */}
+        <div className="grid grid-cols-2 gap-4">
           <Input
             type="number"
             name="rating"
-            placeholder="Đánh giá"
+            placeholder="Đánh giá (0 - 10)"
             value={formData.rating}
             onChange={onNumberChange}
             min={0}
             max={10}
             step={0.1}
-            className="dark:bg-gray-700 dark:text-white"
+            className="w-full max-w-md"
           />
           <Input
             type="text"
@@ -128,38 +137,44 @@ export const MovieFormModal: React.FC<MovieFormModalProps> = ({
             placeholder="URL Hình ảnh"
             value={formData.img_url}
             onChange={onInputChange}
-            className="dark:bg-gray-700 dark:text-white"
+            className="w-full max-w-md"
           />
         </div>
-        <div className="grid grid-cols-2 gap-2">
+
+        {/* Thời lượng + Chất lượng */}
+        <div className="grid grid-cols-2 gap-4">
           <Input
             type="text"
             name="duration"
             placeholder="Thời lượng (ví dụ: 2h 30m)"
             value={formData.duration}
             onChange={onInputChange}
-            className="dark:bg-gray-700 dark:text-white"
+            className="w-full max-w-md"
           />
           <Select
             name="quality"
             value={formData.quality}
             onChange={onInputChange}
-            className="dark:bg-gray-700 dark:text-white"
             options={[
               { value: '', label: 'Chọn chất lượng' },
               ...qualities.map((q) => ({ value: q, label: q })),
             ]}
+            className="w-full max-w-md"
           />
         </div>
+
+        {/* Điểm số */}
         <Input
           type="text"
           name="score"
           placeholder="Điểm số (ví dụ: 8.5/10)"
           value={formData.score}
           onChange={onInputChange}
-          className="dark:bg-gray-700 dark:text-white"
+          className="w-full max-w-md"
         />
-        <div className="flex justify-end gap-2 mt-4">
+
+        {/* Action buttons */}
+        <div className="flex justify-end gap-3 pt-4">
           <Button variant="secondary" onClick={onClose}>
             Hủy
           </Button>

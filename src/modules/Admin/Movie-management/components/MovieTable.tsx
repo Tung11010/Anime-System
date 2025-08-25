@@ -13,7 +13,7 @@ interface MovieTableProps {
 export const MovieTable: React.FC<MovieTableProps> = ({ movies, onEdit, onDelete }) => {
   return (
     <Table
-      title="Danh sách phim"
+      title=""
       headers={['Tiêu đề', 'Loại', 'Trạng thái', 'Đánh giá', 'Ngày phát hành', 'Hành động']}
     >
       {movies.map((movie) => (

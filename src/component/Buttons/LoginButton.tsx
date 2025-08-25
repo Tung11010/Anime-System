@@ -7,11 +7,12 @@ interface LoginButtonProps {
   disabled?: boolean;
 }
 
-const LoginButton: React.FC<LoginButtonProps> = ({ onClick, className = "", text = "LOGIN NOW" }) => (
+const LoginButton: React.FC<LoginButtonProps> = ({ onClick, className = "", text = "LOGIN NOW", disabled = false }) => (
   <button
     onClick={onClick}
     className={`bg-[#e84141] text-white font-semibold text-base tracking-widest px-12 py-4 rounded-none shadow-none outline-none block mx-auto ${className}`}
     style={{ letterSpacing: "0.2em" }}
+    disabled={disabled}
   >
     {text}
   </button>
