@@ -36,12 +36,16 @@ export const SignUpPage: React.FC = () => {
         toast.error(res.message || "Registration failed.");
         setMessage(res.message || "Registration failed.");
       }
-    } catch (error: any) {
-      console.error("Error:", error.message); // Debug lỗi chi tiết
-      toast.error(error.message || "Something went wrong, please try again.");
-      setMessage(error.message || "Something went wrong.");
-    } finally {
-      setLoading(false);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error:", error.message);
+        toast.error(error.message || "Something went wrong, please try again.");
+        setMessage(error.message || "Something went wrong.");
+      } else {
+        console.error("Unknown error:", error);
+        toast.error("Something went wrong, please try again.");
+        setMessage("Something went wrong.");
+      }
     }
   };
 
