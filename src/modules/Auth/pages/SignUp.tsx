@@ -1,19 +1,19 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import BreadCrumb from "../../../component/Banner/BreadCrumb";
 import EmailInput from "../../../component/input/email";
 import PasswordInput from "../../../component/input/password";
-import NameInput from "../../../component/input/name"; 
+import NameInput from "../../../component/input/name";
 import LoginButton from "../../../component/Buttons/LoginButton";
 import FbButton from "../../../component/Buttons/FbButton";
 import GgButton from "../../../component/Buttons/GgButton";
 import TwitterButton from "../../../component/Buttons/TwitterButton";
 import { registerUser } from "../services/authService";
 import { toast } from "react-toastify";
-import { RegisterRequest, RegisterResponse } from "../types/auth.types";
-import { Link } from "react-router-dom";
-
+import { RegisterData as RegisterRequest, RegisterResponse } from "../services/authService";
 
 export const SignUpPage: React.FC = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState<RegisterRequest["email"]>("");
   const [username, setName] = useState<RegisterRequest["username"]>("");
   const [password, setPassword] = useState<RegisterRequest["password"]>("");
@@ -25,23 +25,27 @@ export const SignUpPage: React.FC = () => {
     setLoading(true);
     setMessage("");
     try {
-    const payload: RegisterRequest = { email, username, password };
-    const res: RegisterResponse = await registerUser(payload);
-
-    if (res.success) {
-      toast.success(res.message);
-      console.log("Register success:", res);
-      // Ví dụ: chuyển sang trang login
-      // navigate("/login")
-    } else {
-      toast.error(res.message);
-      setMessage(res.message);
-    }
-    } catch (error) {
-      toast.error("Something went wrong, please try again.");
-      console.error(error);
-    } finally {
-      setLoading(false);
+      const payload: RegisterRequest = { email, username, password };
+      const res: RegisterResponse = await registerUser(payload);
+      console.log("API Response:", res); // Debug phản hồi
+      if (res.success) {
+        toast.success(res.message || "Registration successful!");
+        console.log("Register success:", res);
+        navigate("/login"); // Chuyển hướng tới trang login
+      } else {
+        toast.error(res.message || "Registration failed.");
+        setMessage(res.message || "Registration failed.");
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error:", error.message);
+        toast.error(error.message || "Something went wrong, please try again.");
+        setMessage(error.message || "Something went wrong.");
+      } else {
+        console.error("Unknown error:", error);
+        toast.error("Something went wrong, please try again.");
+        setMessage("Something went wrong.");
+      }
     }
   };
 
@@ -50,7 +54,6 @@ export const SignUpPage: React.FC = () => {
       <BreadCrumb title="Sign Up" />
       <div className="flex flex-col items-center justify-center w-full px-2 py-10">
         <div className="bg-transparent w-full max-w-4xl flex flex-col md:flex-row md:space-x-8 md:bg-[#0B0C2A] md:rounded-lg md:shadow-none">
-          
           {/* Sign Up Form */}
           <div className="flex-1 flex flex-col items-center md:items-start md:pr-8">
             <h2 className="text-white text-2xl font-bold mb-6 w-full">Sign Up</h2>
@@ -62,6 +65,7 @@ export const SignUpPage: React.FC = () => {
                 <LoginButton
                   className="bg-[#F44336] hover:bg-[#d32f2f] text-white font-bold px-6 py-2 rounded min-w-[140px]"
                   text={loading ? "Processing..." : "SIGN UP NOW"}
+                  disabled={loading}
                 />
               </div>
             </form>
@@ -71,10 +75,8 @@ export const SignUpPage: React.FC = () => {
               <Link to="/login" className="text-[#F44336] text-sm hover:underline">Log In!</Link>
             </div>
           </div>
-
           {/* Divider */}
           <div className="hidden md:block w-px bg-gray-600 mx-4" />
-
           {/* Login With Social */}
           <div className="flex-1 flex flex-col items-center md:items-start md:pl-8 mt-8 md:mt-0">
             <h2 className="text-white text-2xl font-bold mb-6 w-full">Login With:</h2>
@@ -84,7 +86,6 @@ export const SignUpPage: React.FC = () => {
               <TwitterButton className="w-full" text="SIGN IN WITH TWITTER" />
             </div>
           </div>
-
         </div>
       </div>
     </div>
