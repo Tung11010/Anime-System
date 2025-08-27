@@ -1,64 +1,76 @@
-import { useEffect, useState } from "react";
+
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Movie } from "../types";
 import { movieService } from "../service/movieService";
 import axios from "axios";
 
 export const useMovies = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const fetchMovies = async () => {
-    try {
-      setLoading(true);
-      const data = await movieService.getAll();
-      setMovies(data);
-      setError(null);
-    } catch (err) {
-      setError("Không thể tải danh sách phim. Vui lòng thử lại.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { data: movies = [], isLoading: loading, error } = useQuery({
+    queryKey: ["movies"],
+    queryFn: movieService.getAll,
+  });
 
-  const createMovie = async (data: Omit<Movie, "id">) => {
-    try {
-      const newMovie = await movieService.create(data);
-      setMovies((prev) => [...prev, newMovie]);
-    } catch {
-      setError("Không thể thêm phim mới.");
-    }
-  };
-
-  const updateMovie = async (id: number, data: Partial<Movie>) => {
-    try {
-      const updated = await movieService.update(id, data);
-      setMovies((prev) => prev.map((m) => (m.id === id ? updated : m)));
-    } catch (err) {
-      if (axios.isAxiosError(err) && err.response?.status === 404) {
-        setError(`Phim với ID ${id} không tồn tại.`);
-      } else {
-        setError("Không thể cập nhật phim.");
+  const createMovie = useMutation({
+    mutationFn: (data: Omit<Movie, "id">) => movieService.create(data),
+    onSuccess: (newMovie) => {
+      queryClient.setQueryData(["movies"], (old: Movie[] | undefined) => [
+        ...(old || []),
+        newMovie,
+      ]);
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return `Phim với ID ${error.response.data.id || "unknown"} không tồn tại.`;
       }
-    }
-  };
+      return "Không thể thêm phim mới.";
+    },
+  });
 
-  const deleteMovie = async (id: number) => {
-    try {
-      await movieService.remove(id);
-      setMovies((prev) => prev.filter((m) => m.id !== id));
-    } catch (err) {
-      if (axios.isAxiosError(err) && err.response?.status === 404) {
-        setError(`Phim với ID ${id} không tồn tại.`);
-      } else {
-        setError("Không thể xóa phim.");
+  const updateMovie = useMutation({
+    mutationFn: ({ id, data }: { id: number; data: Partial<Movie> }) =>
+      movieService.update(id, data),
+    onSuccess: (updatedMovie) => {
+      queryClient.setQueryData(["movies"], (old: Movie[] | undefined) =>
+        old?.map((m) => (m.id === updatedMovie.id ? updatedMovie : m))
+      );
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return `Phim với ID ${error.response.data.id || "unknown"} không tồn tại.`;
       }
-    }
+      return "Không thể cập nhật phim.";
+    },
+  });
+
+  const deleteMovie = useMutation({
+    mutationFn: (id: number) => movieService.remove(id),
+    onSuccess: (_, id) => {
+      queryClient.setQueryData(["movies"], (old: Movie[] | undefined) =>
+        old?.filter((m) => m.id !== id)
+      );
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return `Phim với ID ${error.response.data.id || "unknown"} không tồn tại.`;
+      }
+      return "Không thể xóa phim.";
+    },
+  });
+
+  const fetchMovies = () => {
+    queryClient.invalidateQueries({ queryKey: ["movies"] });
   };
 
-  useEffect(() => {
-    fetchMovies();
-  }, []);
-
-  return { movies, loading, error, fetchMovies, createMovie, updateMovie, deleteMovie };
+  return {
+    movies,
+    loading,
+    error: error ? (typeof error === "string" ? error : error.message) : null,
+    fetchMovies,
+    createMovie: createMovie.mutateAsync,
+    updateMovie: (id: number, data: Partial<Movie>) =>
+      updateMovie.mutateAsync({ id, data }),
+    deleteMovie: deleteMovie.mutateAsync,
+  };
 };
