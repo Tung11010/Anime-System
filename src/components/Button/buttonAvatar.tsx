@@ -1,32 +1,37 @@
 import React from "react";
 
 interface AvatarCircleProps {
-  src: string;
-  alt?: string;
-  size?: number | string;
-  onClick?: () => void;
+  src?: string;
+  username: string;
+  size?: number;
 }
 
-const AvatarCircle: React.FC<AvatarCircleProps> = ({
-  src,
-  alt = "avatar",
-  size = 48,
-  onClick,
-}) => (
-  <img
-    src={src}
-    alt={alt}
-    style={{
-      width: size,
-      height: size,
-      objectFit: "cover",
-      borderRadius: "50%",
-      display: "block",
-      cursor: onClick ? "pointer" : "default",
-      background: "#101136",
-    }}
-    onClick={onClick}
-  />
-);
+const AvatarCircle: React.FC<AvatarCircleProps> = ({ src, username, size = 40 }) => {
+  const initials = username
+    ? username
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase()
+    : "?";
+
+  return (
+    <div
+      className="flex items-center justify-center rounded-full bg-blue-500 text-white font-bold"
+      style={{ width: size, height: size, fontSize: size / 3 }}
+    >
+      {src ? (
+        <img
+          src={src}
+          alt={username}
+          className="w-full h-full rounded-full object-cover"
+        />
+      ) : (
+        initials
+      )}
+    </div>
+  );
+};
 
 export default AvatarCircle;

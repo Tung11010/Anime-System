@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaComment, FaEye, FaStar, FaStarHalf } from 'react-icons/fa';
+import { FaComment, FaEye } from 'react-icons/fa';
 
 interface AnimeInfoType {
   id: number;
@@ -29,7 +29,7 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({ animeInfo }) => {
   if (!animeInfo) return <div className="text-white p-10">Loading...</div>;
 
   return (
-    <div className="w-full p-10 flex flex-col items-center">
+    <div className="w-full p-10 flex flex-col items-center ">
       <div className="w-full flex gap-12 justify-center">
         <div className="ml-20 flex gap-12 w-full max-w-[calc(100%-80px)]">
           {/* Poster Section */}
@@ -58,14 +58,6 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({ animeInfo }) => {
           <div className="flex-1 flex flex-col justify-start">
             <div className="flex items-center mb-10 space-x-7">
               <h1 className="text-3xl font-bold text-white">{animeInfo.title}</h1>
-              <div className="flex items-center gap-1 text-[#ffb400] text-[22px]">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStarHalf />
-              </div>
-              <div className="text-base text-[#ccc] ml-2">1.029 Votes</div>
             </div>
             <div className="text-sm text-[#bdbdbd] mb-4">フェイト／ステイナイト, Feito / sutei naito</div>
             <div className="text-base text-[#e0e0e0] mb-6 leading-relaxed w-full max-w-[800px]">

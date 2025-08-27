@@ -5,4 +5,13 @@ export const getMovieDetailBySlug = async (slug: string) => {
     return response.data
 }
 
+export const postComment = (movieId: number, content: string) => {
+  return axios.post("/comments", { content, movie_id: movieId });
+};
 
+export const handleFollowApi = (movieId: number, userId: number) => {
+  return axios.post("/follow/toggle", {
+    user_id: userId,
+    movie_id: movieId
+  })
+}

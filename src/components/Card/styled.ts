@@ -10,7 +10,6 @@ export const CardWrapper = styled.div`
 
 export const CardHeader = styled.div`
   display: flex;
-  justify-content: space-between;
   font-weight: bold;
   margin-bottom: 8px;
 `;

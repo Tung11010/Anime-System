@@ -12,7 +12,7 @@ const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
   const navigate = useNavigate();
 
   return (
-    <header className="bg-[#070720] h-17">
+    <header className="bg-[#070720] h-17 ">
       <div className="w-[90%] max-w-[1200px] font-semibold h-full mx-auto flex flex-col md:flex-row items-center justify-between ">
         
         {/* Logo */}
@@ -33,7 +33,7 @@ const HeaderClient = ({ onSearchClick }: HeaderLayoutProps) => {
                 Categories <ChevronDown className="ml-2 mt-1" size={16} strokeWidth={2}/>
                 <Link to={'category'} className="fa-solid fa-angle-down text-xs text-[#676767] ml-1.5"></Link>
               </div>
-              <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 absolute bg-[#f9f9f9] min-w-[120px] shadow-md z-20 top-full left-0">
+              <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transform translate-y-2 z-[1000] group-hover:translate-y-0 transition-all duration-300 absolute bg-[#f9f9f9] min-w-[120px] shadow-md top-full left-0">
                 <Link to="category/anime" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Anime</Link>
                 <Link to="category/live-action" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">Live Action</Link>
                 <Link to="category/china-3d" className="block text-[#120707] px-3 py-1.5 no-underline text-sm">China 3D</Link>

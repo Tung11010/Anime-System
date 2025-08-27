@@ -4,6 +4,7 @@ import EpisodeButton from "@/components/Button/buttonEpisodes";
 import { useParams } from "react-router-dom";
 import { useMovieWatchingSlug } from "../QueryHooks";
 import { Episode } from "../types";
+import { SectionHeading } from "@/components/Section";
 
 const SectionEpisode: React.FC = () => {
   const { slug } = useParams();
@@ -29,7 +30,7 @@ const SectionEpisode: React.FC = () => {
       {/* Tiêu đề */}
       <div className="px-7 mt-5">
         <span className="text-white font-extrabold text-l tracking-wide uppercase">
-          List Name
+           <SectionHeading title="List Name" size="large"/>
         </span>
       </div>
 

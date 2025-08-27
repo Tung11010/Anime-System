@@ -1,27 +1,70 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import AvatarCircle from '../../../components/Button/buttonAvatar';
 import { CommentCard } from '../../../components/Card';
 import InputComment from '../../../components/Input/InputComment';
 import ButtonReview from '../../../components/Button/buttonReview';
-import { useParams } from 'react-router-dom';
 import { useMovieDetailSlug } from '../QueryHooks';
-import { useState } from 'react';
 import { Comment } from '../types';
+import { RootState } from "@/modules/Auth/store/store";
+import { toast } from "react-toastify";
+import { SectionHeading } from "@/components/Section";
+import { postComment } from "../services/AnimeDetaild.services";
+
+dayjs.extend(relativeTime);
 
 const SectionComment: React.FC = () => {
   const { slug } = useParams();
   const { data } = useMovieDetailSlug(slug || '');
-  const comments = data?.comments ?? [];
-  const [comment, setComment] = useState('');
+  const movieId = data?.id;
+  
+  const tokenRaw = useSelector((state: RootState) => state.auth.accessToken);
+  const token = tokenRaw ? tokenRaw.replace(/^"|"$/g, '') : null;
+  
 
-  // 👇 Giới hạn số comment ban đầu
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [comment, setComment] = useState('');
   const [visibleCount, setVisibleCount] = useState(5);
 
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (data?.comments) {
+      setComments(data.comments);
+    }
+  }, [data?.comments]);
+
+  const handlePostComment = async () => {
+    if (!token || !movieId) {
+      navigate('/login')
+      return toast.error('Please log in to comment.');
+    }
+    if(!comment.trim()) return toast.error('Please enter a comment before posting')
+
+    try {
+      const res = await postComment(movieId, comment);
+
+      // Gán ngay timeAgo = 'just now'
+      const newComment = {
+        ...res.data,
+        timeAgo: "just now",
+      };
+
+      setComments(prev => [newComment, ...prev]);
+      setComment('');
+    } catch (err) {
+      console.error("Post comment failed:", err);
+    }
+  };
+
   return (
-    <div className="ml-[100px] ">
+    <div className="ml-[100px]">
       {/* Reviews title */}
       <div className="px-7 mt-12">
         <span className="text-white font-extrabold text-xl tracking-wide uppercase">
-          Reviews
+          <SectionHeading title="Reviews" size="large"/>
         </span>
       </div>
 
@@ -29,10 +72,14 @@ const SectionComment: React.FC = () => {
       <div className="mt-12 flex flex-col gap-6 px-7 pb-10">
         {comments.slice(0, visibleCount).map((c: Comment, idx: number) => (
           <div key={idx} className="flex items-start gap-4">
-            <AvatarCircle src={c.user.avatar} size={56} />
+            <AvatarCircle 
+              src={c.user.avatar} 
+              username={c.user.username}
+              size={56} 
+            />
             <CommentCard
               username={c.user.username}
-              time={c.timeAgo}
+              time={(c.timeAgo ? c.timeAgo.replace(/\(s\)/, "") : dayjs(c.timeAgo).fromNow())}
               content={c.content}
             />
           </div>
@@ -42,7 +89,7 @@ const SectionComment: React.FC = () => {
         {visibleCount < comments.length && (
           <button
             onClick={() => setVisibleCount(prev => prev + 5)}
-           className="self-center mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
+            className="self-center mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
           >
             Xem thêm
           </button>
@@ -52,7 +99,7 @@ const SectionComment: React.FC = () => {
       {/* Input comment */}
       <div className="px-7 pt-2 pb-3">
         <span className="text-white font-extrabold text-xl tracking-wide uppercase">
-          Your Comment
+          <SectionHeading title="Your Comment" size="large"/>
         </span>
       </div>
 
@@ -63,7 +110,7 @@ const SectionComment: React.FC = () => {
           placeholder="Your Comment"
         />
         <div className="mt-6">
-          <ButtonReview />
+          <ButtonReview onClick={handlePostComment} />
         </div>
       </div>
     </div>
