@@ -1,11 +1,16 @@
 import { X } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface OverlaySearchProps {
   isActive: boolean;
   OnClose: () => void;
 }
 
+
 const OverlaySearch = ({ isActive, OnClose }: OverlaySearchProps) => {
+  const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
   return (
     <div
       className={`
@@ -27,6 +32,14 @@ const OverlaySearch = ({ isActive, OnClose }: OverlaySearchProps) => {
         <input
           type="text"
           placeholder="Search here......"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && keyword.trim()) {
+              navigate(`/search?q=${encodeURIComponent(keyword.trim())}`);
+              OnClose()
+            }
+          }}
           className="
             w-full bg-black text-[30px] text-[#e6e5e5] border-b border-[#807c7c] 
             focus:outline-none placeholder-gray-400

@@ -1,0 +1,32 @@
+import NewCommentSection from "../component/NewCommentSection"
+import SearchBreadcrum from "../component/SearchBreadcrumb"
+import SearchSection from "../component/SearchSection"
+import TopViewSection from "../component/TopViewSection"
+
+const Search = () => {
+    return (
+        <div className="w-full bg-[rgb(3,3,43)] flex flex-col items-center">
+        <div className="w-full max-w-3xl lg:max-w-[56.3rem] px-4 md:px-8 lg:px-0 pt-6 md:pt-10">
+          <SearchBreadcrum/>
+        </div>
+        <div className="w-full max-w-3xl lg:max-w-[56.3rem] px-4 md:px-8 lg:px-0 py-6 md:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[60%_auto] gap-8 md:gap-5">
+            {/* LEFT COLUMN */}
+            <div className="space-y-8 md:space-y-10">
+              <section>
+                <SearchSection/>
+              </section>
+            </div>
+  
+            {/* RIGHT COLUMN */}
+            <div className="space-y-8 md:space-y-10">
+              <TopViewSection/>
+              <NewCommentSection />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+}
+
+export default Search
