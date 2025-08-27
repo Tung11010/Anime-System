@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { VerticalCard } from "@/components/Card";
-import { SectionHeading } from "@/components/Section";; // 👈 custom hook cho search API
+import { SectionHeading } from "@/components/Section"; 
 import { MoviePreview } from "../types";
 import Pagination from "./Pagination";
 import { useMoviesBySearch } from "../QueryHooks";
@@ -8,7 +8,7 @@ import { useMoviesBySearch } from "../QueryHooks";
 const SearchSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1", 10);
-  const keyword = searchParams.get("q") || ""; // 👈 lấy keyword từ query string ?q=naruto
+  const keyword = searchParams.get("q") || ""; 
 
   // gọi API search
   const searchQuery = useMoviesBySearch(keyword, page);
