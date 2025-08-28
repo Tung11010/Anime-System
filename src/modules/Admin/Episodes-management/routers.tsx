@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import EpisodesManagement from "./Episodes-management";
+import EpisodesManagement from "./pages/EpisodesManagement";
 
 
 export const EpisodesManagementRoutes: RouteObject[] = [

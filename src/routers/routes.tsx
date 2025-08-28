@@ -12,7 +12,7 @@ import { AdminRoutes } from "@/modules/Admin/router";
 import { UserListRoutes } from "@/modules/Admin/User-management/routers";
 import { AdminMoviesRoutes } from "@/modules/Admin/Movie-management/routers";
 import { searchRoutes } from "@/modules/Search/routes";
-import { EpisodesManagementRoutes } from "@/modules/Admin/routers";
+import { EpisodesManagementRoutes } from "@/modules/Admin/Episodes-management/routers";
 
 export const routesAdmin = [...dashboardRoutes];
 export const routesDashboard = [...AdminRoutes, ...UserListRoutes, ...AdminMoviesRoutes, ...EpisodesManagementRoutes];
