@@ -87,6 +87,11 @@ Define the default prefixes for new branches, to allow automated workflows and m
 <p align="center">
   <img src="./src/assets/image/image4.png" width="200"/>
   <img src="./src/assets/image/image5.png" width="200"/>
+  <img src="./src/assets/image/image10.png" width="200"/>
+</p>
+<p align="center">
+  <img src="./src/assets/image/image11.png" width="200"/>
+  <img src="./src/assets/image/image12.png" width="200"/>
   <img src="./src/assets/image/image6.png" width="200"/>
 </p>
 <p align="center">
