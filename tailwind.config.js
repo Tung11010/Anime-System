@@ -1,8 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        mulish: ["Mulish", "sans-serif"],
+        oswald: ["Oswald", "sans-serif"],
+      },
+      keyframes: {
+        slideUpFade: {
+          '0%': { opacity: 0, transform: 'translateY(20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        slideUpFade: 'slideUpFade 0.6s ease forwards',
+      },
       colors: {
         primary: {
           50: "#f0f9f0",
@@ -10,11 +24,12 @@ export default {
           200: "#bae5ba",
           300: "#8dd48d",
           400: "#5cb85c",
-          500: "#4caf50", // Main primary color
+          500: "#4caf50",
           600: "#3d8b40",
           700: "#2e7d32",
           800: "#1b5e20",
           900: "#0d4f0d",
+          dark: "#a5d6a5", // Màu sáng hơn cho chế độ tối
         },
         secondary: {
           50: "#e8f5e8",
@@ -27,16 +42,19 @@ export default {
           700: "#388e3c",
           800: "#2e7d32",
           900: "#1b5e20",
+          dark: "#c8e6c8", // Màu sáng hơn cho chế độ tối
         },
         success: {
           DEFAULT: "#4caf50",
           light: "#81c784",
           dark: "#2e7d32",
+          darkText: "#e2e8f0", // Chữ sáng trên nền tối
         },
         accent: {
           light: "#8bc34a",
           DEFAULT: "#7ed321",
           dark: "#689f38",
+          darkText: "#e2e8f0", // Chữ sáng trên nền tối
         },
       },
     },

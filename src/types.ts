@@ -8,6 +8,7 @@ export interface IParamsRequest {
   q?: string;
 }
 
+
 export interface IPage<T> {
   content: T[];
   totalRecords: number;
