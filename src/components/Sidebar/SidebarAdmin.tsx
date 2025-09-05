@@ -1,105 +1,102 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/Button/ButtonAdmin';
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/Button/ButtonAdmin";
+import {
+  LayoutDashboard,
+  Users,
+  Film,
+  ListVideo,
+  NotebookText,
+  LogOut,
+  Menu,
+} from "lucide-react";
 
 interface SidebarProps {
   onLogout: () => void;
-  onToggle?: () => void; 
+  onToggle?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ onLogout, onToggle }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
 
   const toggleSidebar = () => {
     setCollapsed((c) => !c);
-    if (onToggle) onToggle(); 
+    if (onToggle) onToggle();
   };
+
+  // Danh sách menu với màu icon riêng
+  const menuItems = [
+    { to: "/admin", label: "Dashboard", icon: LayoutDashboard, color: "text-green-400" },
+    { to: "/admin/users", label: "Users", icon: Users, color: "text-blue-400" },
+    { to: "/admin/movies", label: "Movies", icon: Film, color: "text-purple-400" },
+    { to: "/admin/episodes", label: "Episodes", icon: ListVideo, color: "text-yellow-400" },
+    { to: "/admin/blogs", label: "Blogs", icon: NotebookText, color: "text-pink-400" },
+  ];
 
   return (
     <aside
-      className={`bg-gray-900 text-white flex flex-col justify-between fixed top-0 left-0 h-screen transition-all duration-300 ${
-        collapsed ? 'w-20' : 'w-64'
+      className={`bg-gray-900 text-white flex flex-col justify-between fixed top-0 left-0 h-screen transition-all duration-300 shadow-lg ${
+        collapsed ? "w-20" : "w-64"
       }`}
     >
       <div>
+        {/* Header */}
         <div className="h-16 flex items-center border-b border-gray-800 relative">
           <button
             className="absolute left-4 focus:outline-none"
             onClick={toggleSidebar}
-            title={collapsed ? 'Mở rộng' : 'Thu gọn'}
+            title={collapsed ? "Mở rộng" : "Thu gọn"}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-7 h-7"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
-              />
-            </svg>
+            <Menu className="w-7 h-7 text-gray-300 hover:text-white transition-colors" />
           </button>
           <span
             className={`text-2xl font-bold mx-auto transition-opacity ${
-              collapsed ? 'opacity-0 w-0' : ''
+              collapsed ? "opacity-0 w-0" : ""
             }`}
           >
             Admin
           </span>
         </div>
+
+        {/* Navigation */}
         <nav className="flex-1 px-2 py-6 space-y-2">
-          <Link
-            to="/admin"
-            className={`flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-800 ${
-              collapsed ? 'justify-center' : 'bg-gray-800 font-semibold'
-            }`}
-          >
-            {collapsed ? <span className="text-lg">🏠</span> : 'Dashboard'}
-          </Link>
-          <Link
-            to="/admin/users"
-            className={`flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-800 ${
-              collapsed ? 'justify-center' : ''
-            }`}
-          >
-            {collapsed ? <span className="text-lg">🎬</span> : 'Users'}
-          </Link>
-          <Link
-            to="/admin/movies"
-            className={`flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-800 ${
-              collapsed ? 'justify-center' : ''
-            }`}
-          >
-            {collapsed ? <span className="text-lg">👤</span> : 'Movies'}
-          </Link>
-          <Link
-            to="/admin/episodes"
-            className={`flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-800 ${
-              collapsed ? 'justify-center' : ''
-            }`}
-          >
-            {collapsed ? <span className="text-lg">📝</span> : 'Episodes'}
-          </Link>
-          <Link
-            to="/admin/blogs"
-            className={`flex items-center gap-3 py-2 px-3 rounded hover:bg-gray-800 ${
-              collapsed ? 'justify-center' : ''
-            }`}
-          >
-            {collapsed ? <span className="text-lg">📝</span> : 'Blogs'}
-          </Link>
+          {menuItems.map(({ to, label, icon: Icon, color }) => {
+            const isActive = location.pathname === to;
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`flex items-center gap-3 py-2 px-3 rounded transition-all duration-200 ${
+                  collapsed ? "justify-center" : ""
+                } ${
+                  isActive
+                    ? "bg-gray-800 font-semibold"
+                    : "hover:bg-gray-800 hover:scale-[1.02]"
+                }`}
+              >
+                <Icon
+                  className={`w-5 h-5 ${color} ${
+                    isActive ? "drop-shadow-md" : "opacity-80"
+                  }`}
+                />
+                {!collapsed && label}
+              </Link>
+            );
+          })}
         </nav>
       </div>
+
+      {/* Logout */}
       <Button
         variant="danger"
-        className={`m-4 ${collapsed ? 'w-12 justify-center' : ''}`}
+        className={`m-4 flex items-center gap-2 ${
+          collapsed ? "w-12 justify-center" : ""
+        }`}
         onClick={onLogout}
       >
-        {collapsed ? <span>🚪</span> : 'Logout'}
+        <LogOut className="w-5 h-5 text-red-400" />
+        {!collapsed && "Logout"}
       </Button>
     </aside>
   );
